@@ -172,7 +172,7 @@ USB_Result USB_CDC_RecieveData(uint8_t* Buffer, uint32_t Length)
 
   USB_Result result = USB_CDC_SendData(Buffer, Length);
 
-  return result;
+  //return result;
 
 }
 
