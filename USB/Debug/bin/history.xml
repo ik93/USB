@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -Map=USB.map -O0 --gc-sections -lm -lgcc -lc -lstdc++ -LC:\CooCox\CoIDE\configuration\ProgramData\USB -TC:\CooCox\CoIDE\configuration\ProgramData\USB/arm-gcc-link.ld -g">
+      <target file="USB.elf" lastModified="156ae98e43a">
+         <source file="..\obj\MDR32F9Qx_i2c.o" lastModified="156a00482f3"/>
+         <source file="..\obj\MDR32F9Qx_iwdg.o" lastModified="156a0048384"/>
+         <source file="..\obj\MDR32F9Qx_bkp.o" lastModified="156a0048416"/>
+         <source file="..\obj\MDR32F9Qx_uart.o" lastModified="156a004852d"/>
+         <source file="..\obj\MDR32F9Qx_ebc.o" lastModified="156a00485cf"/>
+         <source file="..\obj\MDR32F9Qx_eeprom.o" lastModified="156a004868f"/>
+         <source file="..\obj\main.o" lastModified="156ae98e1e6"/>
+         <source file="..\obj\MDR32F9Qx_usb.o" lastModified="156a004889b"/>
+         <source file="..\obj\MDR32F9Qx_comp.o" lastModified="156a0048933"/>
+         <source file="..\obj\startup_MDR32F9x.o" lastModified="156a004899b"/>
+         <source file="..\obj\MDR32F9Qx_can.o" lastModified="156a0048a5b"/>
+         <source file="..\obj\delays.o" lastModified="156a0048abc"/>
+         <source file="..\obj\MDR32F9Qx_dac.o" lastModified="156a0048b41"/>
+         <source file="..\obj\MDR32F9Qx_power.o" lastModified="156a0048bd6"/>
+         <source file="..\obj\MDR32F9Qx_usb_CDC.o" lastModified="156a0048c68"/>
+         <source file="..\obj\MDR32F9Qx_timer.o" lastModified="156a0048d81"/>
+         <source file="..\obj\system_MDR32F9Qx.o" lastModified="156a0048df2"/>
+         <source file="..\obj\MDR32F9Qx_port.o" lastModified="156a0048e7e"/>
+         <source file="..\obj\MDR32F9Qx_rst_clk.o" lastModified="156a0048f45"/>
+         <source file="..\obj\MDR32F9Qx_adc.o" lastModified="156a004900c"/>
+         <source file="..\obj\MDR32F9Qx_usb_device.o" lastModified="156a0049155"/>
+         <source file="..\obj\MDR32F9Qx_dma.o" lastModified="156a00491f6"/>
+         <source file="..\obj\MDR32F9Qx_ssp.o" lastModified="156a0049288"/>
+         <source file="..\obj\MDR32F9Qx_wwdg.o" lastModified="156a004930d"/>
+      </target>
+   </processor>
+</history>

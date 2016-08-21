@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dependencies>
+   <includePath signature="/I..\..\..\..\..\USB\Library\inc /I..\..\..\..\..\USB\cmsis /I..\..\..\..\..\USB /I..\..\..\..\.. /I..\..\..\..\..\USB\Delays /I..\..\..\..\..\USB\Library /I..\..\..\..\..\USB\USBLibrary\inc /I..\..\..\..\..\USB\USBLibrary">
+      <source file="..\..\..\cmsis\core_cm3.h" lastModified="13658c23f78">
+         <include file="..\..\..\cmsis\core_cmInstr.h"/>
+         <include file="..\..\..\cmsis\core_cmFunc.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_adc.h" lastModified="1429306be50">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_device.h" lastModified="1447296e6c0">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_usb.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\cmsisboot\startup\startup_MDR32F9x.c" lastModified="143239bf520">
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_timer.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_ebc.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_uart.h" lastModified="141e9581570">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_bkp.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_dma.h" lastModified="14293077200">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_wwdg.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_wwdg.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\src\MDR32F9Qx_usb_device.c" lastModified="14472960430">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_handlers.h"/>
+      </source>
+      <source file="..\..\..\Delays\delays.h" lastModified="144773d1e10">
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_lib.h" lastModified="136d017f9f0">
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_timer.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_timer.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Delays\delays.c" lastModified="1407bcb1710">
+         <include file="..\..\..\Delays\delays.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_i2c.h" lastModified="14293097d70">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_default_handlers.h" lastModified="140aa53def0">
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_CDC.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_ssp.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_ssp.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="13658c24360">
+      </source>
+      <source file="..\..\..\USBLibrary\src\MDR32F9Qx_usb_CDC.c" lastModified="14477587610">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_handlers.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_uart.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_uart.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_usb.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_usb.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_comp.h" lastModified="14293073380">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_power.h" lastModified="142930db390">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\cmsis\system_MDR32F9Qx.h" lastModified="140f3614970">
+      </source>
+      <source file="..\..\..\cmsis\system_MDR32F9Qx.c" lastModified="14293052810">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\main.h" lastModified="156ae2a6d25">
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_port.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_usb.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_handlers.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_device.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_dac.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_dac.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_can.c" lastModified="1429306f500">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_can.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_power.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_power.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\main.c" lastModified="156ae98dba7">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\main.h"/>
+         <include file="..\..\..\Delays\delays.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="13658c24360">
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_adc.c" lastModified="141ee16c660">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_adc.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\cmsis\MDR32F9Qx_board.h" lastModified="140f36139d0">
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_eeprom.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_eeprom.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_iwdg.h" lastModified="142930994e0">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_comp.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_comp.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_ebc.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_ebc.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_bkp.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_bkp.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_dma.c" lastModified="14293094e90">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_dma.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_port.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_eeprom.h" lastModified="14299942460">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+      </source>
+      <source file="..\..\..\cmsis\MDR32F9Qx_config.h" lastModified="142930683b8">
+         <include file="..\..\..\cmsis\MDR32F9Qx_board.h"/>
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_ssp.h" lastModified="141e9581570">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_handlers.h" lastModified="140aa497eb0">
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_default_handlers.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_rst_clk.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_usb.h" lastModified="14293066860">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\cmsis\MDR32F9x.h" lastModified="142b292a400">
+         <include file="..\..\..\cmsis\core_cm3.h"/>
+         <include file="..\..\..\cmsis\system_MDR32F9Qx.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_i2c.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_i2c.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_wwdg.h" lastModified="141e9589270">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_iwdg.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_iwdg.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_CDC.h" lastModified="1447296bfb0">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_device.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_can.h" lastModified="14293071c10">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_dac.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_port.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_port.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+   </includePath>
+   <includePath signature="/I..\..\..\..\..\CooCox+Миландр\USB\USBLibrary /I..\..\..\..\..\CooCox+Миландр\USB /I..\..\..\..\..\CooCox+Миландр /I..\..\..\..\..\CooCox+Миландр\USB\Library /I..\..\..\..\..\CooCox+Миландр\USB\Library\inc /I..\..\..\..\..\CooCox+Миландр\USB\cmsis /I..\..\..\..\..\CooCox+Миландр\USB\Delays /I..\..\..\..\..\CooCox+Миландр\USB\USBLibrary\inc">
+      <source file="..\..\..\Library\inc\MDR32F9Qx_adc.h" lastModified="1429306be50">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_device.h" lastModified="1447296e6c0">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_usb.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\cmsisboot\startup\startup_MDR32F9x.c" lastModified="143239bf520">
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_timer.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_ebc.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_uart.h" lastModified="141e9581570">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_bkp.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_dma.h" lastModified="14293077200">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_wwdg.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_wwdg.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\src\MDR32F9Qx_usb_device.c" lastModified="14472960430">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_handlers.h"/>
+      </source>
+      <source file="..\..\..\Delays\delays.h" lastModified="144773d1e10">
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_lib.h" lastModified="136d017f9f0">
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_timer.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_timer.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Delays\delays.c" lastModified="1407bcb1710">
+         <include file="..\..\..\Delays\delays.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_i2c.h" lastModified="14293097d70">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_default_handlers.h" lastModified="140aa53def0">
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_CDC.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_ssp.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_ssp.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\src\MDR32F9Qx_usb_CDC.c" lastModified="14477587610">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_handlers.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_uart.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_uart.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_usb.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_usb.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_comp.h" lastModified="14293073380">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_power.h" lastModified="142930db390">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\cmsis\system_MDR32F9Qx.h" lastModified="140f3614970">
+      </source>
+      <source file="..\..\..\cmsis\system_MDR32F9Qx.c" lastModified="14293052810">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_dac.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_dac.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_can.c" lastModified="1429306f500">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_can.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_power.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_power.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_adc.c" lastModified="141ee16c660">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_adc.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\cmsis\MDR32F9Qx_board.h" lastModified="140f36139d0">
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_eeprom.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_eeprom.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_iwdg.h" lastModified="142930994e0">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_comp.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_comp.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_ebc.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_ebc.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_bkp.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_bkp.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_dma.c" lastModified="14293094e90">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_dma.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_port.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_eeprom.h" lastModified="14299942460">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_ssp.h" lastModified="141e9581570">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_handlers.h" lastModified="140aa497eb0">
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_default_handlers.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_rst_clk.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_usb.h" lastModified="14293066860">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\cmsis\MDR32F9x.h" lastModified="142b292a400">
+         <include file="..\..\..\cmsis\core_cm3.h"/>
+         <include file="..\..\..\cmsis\system_MDR32F9Qx.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_i2c.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_i2c.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_wwdg.h" lastModified="141e9589270">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_iwdg.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_iwdg.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+      <source file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_CDC.h" lastModified="1447296bfb0">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+         <include file="..\..\..\USBLibrary\inc\MDR32F9Qx_usb_device.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_can.h" lastModified="14293071c10">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\inc\MDR32F9Qx_dac.h" lastModified="141e9567760">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_lib.h"/>
+      </source>
+      <source file="..\..\..\Library\src\MDR32F9Qx_port.c" lastModified="136d017f9f0">
+         <include file="..\..\..\Library\inc\MDR32F9Qx_port.h"/>
+         <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
+      </source>
+   </includePath>
+</dependencies>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DM3 -DF_CPU = 80000000UL -D_OPTIMIZATION_1 -I..\..\..\..\..\USB\Library\inc -I..\..\..\..\..\USB\cmsis -I..\..\..\..\..\USB -I..\..\..\..\.. -I..\..\..\..\..\USB\Delays -I..\..\..\..\..\USB\Library -I..\..\..\..\..\USB\USBLibrary\inc -I..\..\..\..\..\USB\USBLibrary">
+      <target file="MDR32F9Qx_timer.o" lastModified="156a0048d81">
+         <source file="..\..\..\Library\src\MDR32F9Qx_timer.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_dma.o" lastModified="156a00491f6">
+         <source file="..\..\..\Library\src\MDR32F9Qx_dma.c" lastModified="14293094e90"/>
+      </target>
+      <target file="MDR32F9Qx_ebc.o" lastModified="156a00485cf">
+         <source file="..\..\..\Library\src\MDR32F9Qx_ebc.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_usb_device.o" lastModified="156a0049155">
+         <source file="..\..\..\USBLibrary\src\MDR32F9Qx_usb_device.c" lastModified="14472960430"/>
+      </target>
+      <target file="MDR32F9Qx_comp.o" lastModified="156a0048933">
+         <source file="..\..\..\Library\src\MDR32F9Qx_comp.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_dac.o" lastModified="156a0048b41">
+         <source file="..\..\..\Library\src\MDR32F9Qx_dac.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="startup_MDR32F9x.o" lastModified="156a004899b">
+         <source file="..\..\..\cmsisboot\startup\startup_MDR32F9x.c" lastModified="143239bf520"/>
+      </target>
+      <target file="MDR32F9Qx_i2c.o" lastModified="156a00482f3">
+         <source file="..\..\..\Library\src\MDR32F9Qx_i2c.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_ssp.o" lastModified="156a0049288">
+         <source file="..\..\..\Library\src\MDR32F9Qx_ssp.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_wwdg.o" lastModified="156a004930d">
+         <source file="..\..\..\Library\src\MDR32F9Qx_wwdg.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_rst_clk.o" lastModified="156a0048f45">
+         <source file="..\..\..\Library\src\MDR32F9Qx_rst_clk.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_eeprom.o" lastModified="156a004868f">
+         <source file="..\..\..\Library\src\MDR32F9Qx_eeprom.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_power.o" lastModified="156a0048bd6">
+         <source file="..\..\..\Library\src\MDR32F9Qx_power.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_iwdg.o" lastModified="156a0048384">
+         <source file="..\..\..\Library\src\MDR32F9Qx_iwdg.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_bkp.o" lastModified="156a0048416">
+         <source file="..\..\..\Library\src\MDR32F9Qx_bkp.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_usb_CDC.o" lastModified="156a0048c68">
+         <source file="..\..\..\USBLibrary\src\MDR32F9Qx_usb_CDC.c" lastModified="14477587610"/>
+      </target>
+      <target file="MDR32F9Qx_can.o" lastModified="156a0048a5b">
+         <source file="..\..\..\Library\src\MDR32F9Qx_can.c" lastModified="1429306f500"/>
+      </target>
+      <target file="system_MDR32F9Qx.o" lastModified="156a0048df2">
+         <source file="..\..\..\cmsis\system_MDR32F9Qx.c" lastModified="14293052810"/>
+      </target>
+      <target file="delays.o" lastModified="156a0048abc">
+         <source file="..\..\..\Delays\delays.c" lastModified="1407bcb1710"/>
+      </target>
+      <target file="MDR32F9Qx_adc.o" lastModified="156a004900c">
+         <source file="..\..\..\Library\src\MDR32F9Qx_adc.c" lastModified="141ee16c660"/>
+      </target>
+      <target file="MDR32F9Qx_port.o" lastModified="156a0048e7e">
+         <source file="..\..\..\Library\src\MDR32F9Qx_port.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="MDR32F9Qx_uart.o" lastModified="156a004852d">
+         <source file="..\..\..\Library\src\MDR32F9Qx_uart.c" lastModified="136d017f9f0"/>
+      </target>
+      <target file="main.o" lastModified="156ae98e1e6">
+         <source file="..\..\..\main.c" lastModified="156ae98dba7"/>
+      </target>
+      <target file="MDR32F9Qx_usb.o" lastModified="156a004889b">
+         <source file="..\..\..\Library\src\MDR32F9Qx_usb.c" lastModified="136d017f9f0"/>
+      </target>
+   </processor>
+</history>
