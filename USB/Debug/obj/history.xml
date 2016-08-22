@@ -67,8 +67,8 @@
       <target file="MDR32F9Qx_uart.o" lastModified="156a004852d">
          <source file="..\..\..\Library\src\MDR32F9Qx_uart.c" lastModified="136d017f9f0"/>
       </target>
-      <target file="main.o" lastModified="156aee188a1">
-         <source file="..\..\..\main.c" lastModified="156aee1806d"/>
+      <target file="main.o" lastModified="156b47b4790">
+         <source file="..\..\..\main.c" lastModified="156b47b409e"/>
       </target>
       <target file="MDR32F9Qx_usb.o" lastModified="156a004889b">
          <source file="..\..\..\Library\src\MDR32F9Qx_usb.c" lastModified="136d017f9f0"/>

@@ -6,8 +6,26 @@ PORT_InitTypeDef PORT_InitStructure;
 
 //==========================Эксперименты===============================================================================
 
+typedef struct
+{
+
+	uint8_t StartByte1;    		// 7E 81 Обрамление начала сообщения
+	uint8_t StartByte2;    		// 7E 81 Обрамление начала сообщения
+	uint8_t Address;   			// ADR1 or ADR2 Receiver address
+	uint8_t InvAddress;			// /ADR1 or /ADR2
+	uint8_t SenderAddress;		//
+	uint8_t DataLenght;			// Q
+	uint8_t Command;			// CMD
+	uint8_t CommandData;		// CONTC
+	uint8_t CheckSumLow;		// CHSL
+	uint8_t CheckSumHigh;		// CHSH
+	uint8_t EndByte;			// F0
+
+} ParseRxMessage;
+
 uint8_t RxUSB_Buffer[10];	  //Буфер приема сообщений от ПК
-uint8_t task;                 //Текущая команда от ПК: начать набор, остановить, сброс
+ParseRxMessage task;                  //Текущая команда от ПК: начать набор, остановить, сброс
+ParseRxMessage previous_task;		  //Предыдущая команда от ПК
 
 #define START_SPECTR 0x04	//Набор спектра
 #define STOP_SPECTR 0x01	//Останов
@@ -17,27 +35,60 @@ uint8_t task;                 //Текущая команда от ПК: начать набор, остановить,
 #define LED2            PORT_Pin_11
 #define LED3            PORT_Pin_12
 
-void Command_Handler (void)
+
+ParseRxMessage RxParser(uint8_t *RxBuffer)
 {
-	LEDOff(LED1 | LED2 | LED3 );
-	task = RxUSB_Buffer[8];
 
-	switch (task)
-	{
-		case START_SPECTR:
-		LEDOn(LED1);
-		break;
+	ParseRxMessage RxMessage;
 
-		case STOP_SPECTR:
-		LEDOn(LED2);
-		break;
+	RxMessage.StartByte1 = RxBuffer[0];
+	RxMessage.StartByte2 = RxBuffer[1];
+	RxMessage.Address = RxBuffer[2];
+	RxMessage.InvAddress = RxBuffer[3];
+	RxMessage.SenderAddress = RxBuffer[4];
+	RxMessage.DataLenght = RxBuffer[5];
+	RxMessage.Command = RxBuffer[6];
+	RxMessage.CommandData = RxBuffer[7];
+	RxMessage.CheckSumLow = RxBuffer[8];
+	RxMessage.CheckSumHigh = RxBuffer[9];
+	RxMessage.EndByte = RxBuffer[10];
 
-		case RESET_SPECTR:
-		LEDOn(LED3);
-		break;
+	return RxMessage;
+}
+
+void TxUSB_Constructor(uint8_t *outBuffer, ParseRxMessage RxMessage, ParseRxMessage previous_task)
+{
+	outBuffer[0] = RxMessage.StartByte1;
+	outBuffer[1] = RxMessage.StartByte2;
+	outBuffer[2] = RxMessage.SenderAddress;
+	outBuffer[3] = RxMessage.SenderAddress ^ 0xFF;
+	outBuffer[4] = RxMessage.Address;
+	outBuffer[5] = 0x09;
+	outBuffer[6] = 0x89;
+	outBuffer[7] = previous_task.CommandData != RxMessage.CommandData;
+	uint16_t checksum =  0;
+	for (int i = 0; i < 8; ++i) {
+		checksum += outBuffer[i];
+	}
+	uint8_t low = checksum & 0xFF;
+	uint8_t high = (checksum >> 8) & 0xFF;
+	outBuffer[8] = low;
+	outBuffer[9] = high;
+	outBuffer[10] = RxMessage.EndByte;
+}
+
+void Command_Handler(uint8_t *outBuffer, ParseRxMessage RxMessage)
+{
+
+	previous_task = task;
+	task = RxMessage;
+
+	if (task.CommandData == previous_task.CommandData) {
+		return;
 	}
 
-	LEDOn(LED2);
+	TxUSB_Constructor(outBuffer, task, previous_task);
+
 }
 
 
@@ -70,53 +121,53 @@ void LEDOff(uint32_t LED_Num)
 }
 
 
-static void ADC_Configuration(void)
-{
-	// Структуры для инициализации АЦП
-	  ADC_InitTypeDef ADC_InitStructure;
-		ADCx_InitTypeDef ADCx_InitStructure;
+//static void ADC_Configuration(void)
+//{
+//	// Структуры для инициализации АЦП
+//	  ADC_InitTypeDef ADC_InitStructure;
+//		ADCx_InitTypeDef ADCx_InitStructure;
+//
+//	  // Разрешить тактирование АЦП
+//	  RST_CLK_PCLKcmd (RST_CLK_PCLK_ADC, ENABLE);
+//
+//	  ADC_DeInit();
+//	  ADC_StructInit(&ADC_InitStructure);
+//
+//	  // Конфигурация АЦП общая
+//	  ADC_InitStructure.ADC_SynchronousMode      = ADC_SyncMode_Independent;						// Независимый запуск АЦП
+//	  ADC_InitStructure.ADC_StartDelay           = 0;																		// Задрежка между запусками АЦП1 и АЦП2
+//	  ADC_InitStructure.ADC_TempSensor           = ADC_TEMP_SENSOR_Enable;              // Разрешить работу температурного датчика
+//	  ADC_InitStructure.ADC_TempSensorAmplifier  = ADC_TEMP_SENSOR_AMPLIFIER_Enable;    // Разрешить работу усилителя для температурного датчика
+//	  ADC_InitStructure.ADC_TempSensorConversion = ADC_TEMP_SENSOR_CONVERSION_Enable;   // Разрешить преобразования для канала температурного датчика
+//	  ADC_InitStructure.ADC_IntVRefConversion    = ADC_VREF_CONVERSION_Disable;         // Запретить преобразования для канала VREF (внутренней опоры)
+//	  ADC_InitStructure.ADC_IntVRefTrimming      = 1;                                   // Подстройка источника напряжения VREF
+//	  ADC_Init (&ADC_InitStructure);
+//
+//	  // Конфигурация АЦП1
+//	  ADCx_StructInit (&ADCx_InitStructure);
+//	  ADCx_InitStructure.ADC_ClockSource      = ADC_CLOCK_SOURCE_CPU;						// Тактировать АЦП той же частотой, что и ядро МК
+//	  ADCx_InitStructure.ADC_SamplingMode     = ADC_SAMPLING_MODE_CICLIC_CONV;	// Режим циклического преобразования (несколько раз подряд)
+//	  ADCx_InitStructure.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;				// Режим переключения каналов (запретить)
+//	  ADCx_InitStructure.ADC_ChannelNumber    = ADC_CH_TEMP_SENSOR;							// Выбранный канал АЦП (температурный датчик)
+//	  ADCx_InitStructure.ADC_Channels         = 0;															// Выбранные каналы АЦП с последовательным опросом (не выбраны)
+//	  ADCx_InitStructure.ADC_LevelControl     = ADC_LEVEL_CONTROL_Disable;			// Контроль уровня входнрого напряжения (отключено)
+//	  ADCx_InitStructure.ADC_LowLevel         = 0;															// Нижний уровень
+//	  ADCx_InitStructure.ADC_HighLevel        = 0;															// Верхний уровень
+//	  ADCx_InitStructure.ADC_VRefSource       = ADC_VREF_SOURCE_INTERNAL;				// Вид источника опроного напряжения (внутренний)
+//	  ADCx_InitStructure.ADC_IntVRefSource    = ADC_INT_VREF_SOURCE_INEXACT;	  // Вид внутреннего источника опроного напряжения (не точный)
+//	  ADCx_InitStructure.ADC_Prescaler        = ADC_CLK_div_512;								// Предделитель частоты тактирования АЦП (512)
+//	  ADCx_InitStructure.ADC_DelayGo          = 7;															// Задержка между запусками АЦП (максимальная)
+//	  ADC1_Init (&ADCx_InitStructure);
+//
+//	  // Разрешить работу АЦП1
+//	  ADC1_Cmd (ENABLE);
+//
+//	  // Разрешить прерывания от DMA
+//	  NVIC_EnableIRQ (DMA_IRQn);
+//}
 
-	  // Разрешить тактирование АЦП
-	  RST_CLK_PCLKcmd (RST_CLK_PCLK_ADC, ENABLE);
 
-	  ADC_DeInit();
-	  ADC_StructInit(&ADC_InitStructure);
-
-	  // Конфигурация АЦП общая
-	  ADC_InitStructure.ADC_SynchronousMode      = ADC_SyncMode_Independent;						// Независимый запуск АЦП
-	  ADC_InitStructure.ADC_StartDelay           = 0;																		// Задрежка между запусками АЦП1 и АЦП2
-	  ADC_InitStructure.ADC_TempSensor           = ADC_TEMP_SENSOR_Enable;              // Разрешить работу температурного датчика
-	  ADC_InitStructure.ADC_TempSensorAmplifier  = ADC_TEMP_SENSOR_AMPLIFIER_Enable;    // Разрешить работу усилителя для температурного датчика
-	  ADC_InitStructure.ADC_TempSensorConversion = ADC_TEMP_SENSOR_CONVERSION_Enable;   // Разрешить преобразования для канала температурного датчика
-	  ADC_InitStructure.ADC_IntVRefConversion    = ADC_VREF_CONVERSION_Disable;         // Запретить преобразования для канала VREF (внутренней опоры)
-	  ADC_InitStructure.ADC_IntVRefTrimming      = 1;                                   // Подстройка источника напряжения VREF
-	  ADC_Init (&ADC_InitStructure);
-
-	  // Конфигурация АЦП1
-	  ADCx_StructInit (&ADCx_InitStructure);
-	  ADCx_InitStructure.ADC_ClockSource      = ADC_CLOCK_SOURCE_CPU;						// Тактировать АЦП той же частотой, что и ядро МК
-	  ADCx_InitStructure.ADC_SamplingMode     = ADC_SAMPLING_MODE_CICLIC_CONV;	// Режим циклического преобразования (несколько раз подряд)
-	  ADCx_InitStructure.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;				// Режим переключения каналов (запретить)
-	  ADCx_InitStructure.ADC_ChannelNumber    = ADC_CH_TEMP_SENSOR;							// Выбранный канал АЦП (температурный датчик)
-	  ADCx_InitStructure.ADC_Channels         = 0;															// Выбранные каналы АЦП с последовательным опросом (не выбраны)
-	  ADCx_InitStructure.ADC_LevelControl     = ADC_LEVEL_CONTROL_Disable;			// Контроль уровня входнрого напряжения (отключено)
-	  ADCx_InitStructure.ADC_LowLevel         = 0;															// Нижний уровень
-	  ADCx_InitStructure.ADC_HighLevel        = 0;															// Верхний уровень
-	  ADCx_InitStructure.ADC_VRefSource       = ADC_VREF_SOURCE_INTERNAL;				// Вид источника опроного напряжения (внутренний)
-	  ADCx_InitStructure.ADC_IntVRefSource    = ADC_INT_VREF_SOURCE_INEXACT;	  // Вид внутреннего источника опроного напряжения (не точный)
-	  ADCx_InitStructure.ADC_Prescaler        = ADC_CLK_div_512;								// Предделитель частоты тактирования АЦП (512)
-	  ADCx_InitStructure.ADC_DelayGo          = 7;															// Задержка между запусками АЦП (максимальная)
-	  ADC1_Init (&ADCx_InitStructure);
-
-	  // Разрешить работу АЦП1
-	  ADC1_Cmd (ENABLE);
-
-	  // Разрешить прерывания от DMA
-	  NVIC_EnableIRQ (DMA_IRQn);
-}
-
-
-//=======================================================================================================================
+//======================================================================================================================================================
 
 static void VCom_Configuration(void)
 {
@@ -212,15 +263,15 @@ int main(void)
 
 USB_Result USB_CDC_RecieveData(uint8_t* Buffer, uint32_t Length)
 {
-  //USB_Result result;
-	USB_Buf[cnt++] = Buffer[0];
+	//USB_Buf[cnt++] = Buffer[0];
 
-	Command_Handler();   //=========================относится к экспериментам
+	ParseRxMessage rxMessage = RxParser(Buffer);
+	uint8_t sendBuffer[11] = {0};
+	Command_Handler(&sendBuffer[0], rxMessage);  // -&
 
-  USB_Result result = USB_CDC_SendData(Buffer, Length);
+	USB_Result result = USB_CDC_SendData(sendBuffer, 11);
 
-  //return result;
-
+	return result;
 }
 
 /* USB_CDC_HANDLE_GET_LINE_CODING implementation example */

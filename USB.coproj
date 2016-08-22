@@ -121,9 +121,9 @@
     <File name="Library/src/MDR32F9Qx_dma.c" path="Library/src/MDR32F9Qx_dma.c" type="1"/>
     <File name="cmsis" path="" type="2"/>
     <File name="Library/src/MDR32F9Qx_iwdg.c" path="Library/src/MDR32F9Qx_iwdg.c" type="1"/>
-    <File name="Library/inc/MDR32F9Qx_comp.h" path="Library/inc/MDR32F9Qx_comp.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_adc.c" path="Library/src/MDR32F9Qx_adc.c" type="1"/>
     <File name="Library/src/MDR32F9Qx_uart.c" path="Library/src/MDR32F9Qx_uart.c" type="1"/>
+    <File name="Library/inc/MDR32F9Qx_comp.h" path="Library/inc/MDR32F9Qx_comp.h" type="1"/>
     <File name="Library/inc/MDR32F9Qx_dma.h" path="Library/inc/MDR32F9Qx_dma.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_can.c" path="Library/src/MDR32F9Qx_can.c" type="1"/>
     <File name="Library/inc/MDR32F9Qx_ssp.h" path="Library/inc/MDR32F9Qx_ssp.h" type="1"/>
