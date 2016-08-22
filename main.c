@@ -19,7 +19,7 @@ uint8_t task;                 //Текущая команда от ПК: начать набор, остановить,
 
 void Command_Handler (void)
 {
-	LEDOff();
+	LEDOff(LED1 | LED2 | LED3 );
 	task = RxUSB_Buffer[8];
 
 	switch (task)
