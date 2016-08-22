@@ -12,23 +12,38 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/USB/main.c" title="main.c" tooltip="C:/USB/main.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/USB/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="9" selectionOffset="1924" selectionTopPixel="1207"/>
-</editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="MDR32F9Qx_usb_CDC.c" partName="MDR32F9Qx_usb_CDC.c" path="C:/USB/USBLibrary/src/MDR32F9Qx_usb_CDC.c" title="MDR32F9Qx_usb_CDC.c" tooltip="C:/USB/USBLibrary/src/MDR32F9Qx_usb_CDC.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/USB/USBLibrary/src/MDR32F9Qx_usb_CDC.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="11378" selectionTopPixel="4590"/>
+<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="11378" selectionTopPixel="4471"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="MDR32F9Qx_usb_handlers.h" partName="MDR32F9Qx_usb_handlers.h" path="C:/USB/USBLibrary/inc/MDR32F9Qx_usb_handlers.h" title="MDR32F9Qx_usb_handlers.h" tooltip="C:/USB/USBLibrary/inc/MDR32F9Qx_usb_handlers.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/USB/USBLibrary/inc/MDR32F9Qx_usb_handlers.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="584" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/USB/main.c" title="main.c" tooltip="C:/USB/main.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/USB/main.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4572" selectionTopPixel="1180"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.h" partName="main.h" title="main.h" tooltip="C:\USB\main.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" path="C:\USB\main.h" project="USB"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="629" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="MDR32F9Qx_usb_default_handlers.h" partName="MDR32F9Qx_usb_default_handlers.h" path="C:/USB/USBLibrary/inc/MDR32F9Qx_usb_default_handlers.h" title="MDR32F9Qx_usb_default_handlers.h" tooltip="C:/USB/USBLibrary/inc/MDR32F9Qx_usb_default_handlers.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/USB/USBLibrary/inc/MDR32F9Qx_usb_default_handlers.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="12061" selectionTopPixel="5049"/>
 </editor>
 </editors>
 <views>
 <view id="org.eclipse.debug.ui.ExpressionView" partName="Expressions">
 <viewState>
-<ExpressionKeySet ExpKeys="USB_Buf,Buffer,RxUSB_Buffer,"/>
+<ExpressionKeySet ExpKeys="USB_Buf,Buffer,"/>
 </viewState>
 </view>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
@@ -92,7 +107,7 @@
 <hide_toolbar_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
 <view id="org.coocox.builder.ui.views.ProjectView"/>
 <fastViewBars>
-<fastViewBar fastViewLocation="1024" id="org.eclipse.ui.internal.ViewStack@1021b8a" orientation="256" selectedTabId="org.eclipse.ui.console.ConsoleView" style="0">
+<fastViewBar fastViewLocation="1024" id="org.eclipse.ui.internal.ViewStack@1021b8a" orientation="256" selectedTabId="org.eclipse.search.ui.views.SearchView" style="0">
 <fastViews>
 <view id="org.eclipse.ui.console.ConsoleView" ratio="0.2996812"/>
 <view id="org.eclipse.search.ui.views.SearchView" ratio="0.2996812"/>
@@ -185,8 +200,8 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
+<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <view id="org.coocox.codebugger.trace.ui.traceview"/>
@@ -195,50 +210,36 @@
 <view id="org.eclipse.search.ui.views.SearchView"/>
 <fastViewBars/>
 <viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
-<layout>
-<mainWindow>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1ea44aa">
-<folder appearance="2" expanded="2">
-<page content="org.coocox.builder.ui.views.ProjectView" label="LabelNotFound"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.ui.internal.ViewStack@1ea44aa">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.coocox.builder.ui.views.ProjectView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7497309" ratioLeft="1393" ratioRight="465" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1ea44aa">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7497309" ratioLeft="1393" ratioRight="465" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1ea44aa">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1a4843f" ratio="0.6641791" ratioLeft="623" ratioRight="315" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1ea44aa">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1a4843f" ratio="0.3283582" ratioLeft="308" ratioRight="630" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1ea44aa">&#x0A;<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1e6586e" ratio="0.4436878" ratioLeft="847" ratioRight="1062" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1a4843f">
-<folder activePageID="org.eclipse.debug.ui.ExpressionView" appearance="2" expanded="2">
-<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1e6586e" ratio="0.5" ratioLeft="929" ratioRight="929" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1a4843f">&#x0A;<folder activePageID="org.eclipse.debug.ui.ExpressionView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
 <page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="Expressions"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
 <page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@4bb353" ratio="0.7497309" ratioLeft="1393" ratioRight="465" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1ea44aa">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@4bb353" ratio="0.7497309" ratioLeft="1393" ratioRight="465" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1ea44aa">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
 <page content="org.coocox.coassistant.view.CoAssistantView_debug" label="LabelNotFound"/>
@@ -255,42 +256,161 @@
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/USB/main.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/USB/USBLibrary/src/MDR32F9Qx_usb_CDC.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/USB/USBLibrary/src/MDR32F9Qx_usb_device.c"/>
+<editor factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="C:\USB\main.h" project="USB"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/USB/USBLibrary/src/MDR32F9Qx_usb_CDC.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/USB/USBLibrary/inc/MDR32F9Qx_usb_default_handlers.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/USB/USBLibrary/inc/MDR32F9Qx_usb_handlers.h"/>
 </editors>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="4678" y="0"/>
+<position info="not_deleted" x="1936" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="0" y="0"/>
+<position info="not_deleted" x="1631" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3800" y="1"/>
+<position info="not_deleted" x="1645" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3876" y="0"/>
+<position info="not_deleted" x="1660" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3274" y="0"/>
+<position info="not_deleted" x="1675" y="0"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_device.c" index="2">
+<position info="not_deleted" x="42126" y="0"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_device.c" index="2">
+<position info="not_deleted" x="42129" y="0"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_device.c" index="2">
+<position info="not_deleted" x="42159" y="0"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_device.c" index="2">
+<position info="not_deleted" x="42126" y="0"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_device.c" index="2">
+<position info="not_deleted" x="42129" y="0"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_device.c" index="2">
+<position info="not_deleted" x="42159" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3601" y="0"/>
+<position info="not_deleted" x="1675" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3325" y="0"/>
+<position info="not_deleted" x="1707" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3342" y="0"/>
+<position info="not_deleted" x="1726" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1936" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1631" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1819" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="2125" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="2184" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="2202" y="0"/>
 </item>
 <item historyLabel="MDR32F9Qx_usb_CDC.c" index="1">
+<position info="not_deleted" x="22407" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1631" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="2125" y="0"/>
+</item>
+<item historyLabel="main.h" index="3">
+<position info="not_deleted" x="629" y="0"/>
+</item>
+<item historyLabel="main.h" index="3">
+<position info="not_deleted" x="620" y="6"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_CDC.c" index="4">
+<position info="not_deleted" x="22407" y="0"/>
+</item>
+<item historyLabel="main.h" index="3">
+<position/>
+</item>
+<item historyLabel="main.c" index="0">
+<position/>
+</item>
+<item historyLabel="main.c" index="0">
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_CDC.c" index="4">
 <position info="not_deleted" x="11378" y="12"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3342" y="0"/>
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_CDC.c" index="4">
+<position info="not_deleted" x="11378" y="12"/>
 </item>
 <item historyLabel="main.c" index="0">
-<position info="not_deleted" x="3325" y="0"/>
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_default_handlers.h" index="5">
+<position info="not_deleted" x="12061" y="0"/>
+</item>
+<item historyLabel="main.h" index="3">
+<position/>
+</item>
+<item historyLabel="main.c" index="0">
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_handlers.h" index="6">
+<position info="not_deleted" x="853" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_CDC.c" index="4">
+<position info="not_deleted" x="22245" y="43"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_default_handlers.h" index="5">
+<position info="not_deleted" x="12061" y="0"/>
+</item>
+<item historyLabel="main.h" index="3">
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_handlers.h" index="6">
+<position info="not_deleted" x="840" y="19"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_CDC.c" index="4">
+<position info="not_deleted" x="22261" y="0"/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_handlers.h" index="6">
+<position info="not_deleted" x="584" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position/>
+</item>
+<item historyLabel="MDR32F9Qx_usb_CDC.c" index="4">
+<position info="not_deleted" x="11378" y="12"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="2678" y="0"/>
 </item>
 <item active="true" historyLabel="main.c" index="0">
-<position info="not_deleted" x="1924" y="9"/>
+<position/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -338,8 +458,11 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="MDR32F9Qx_usb.c" tooltip="USB/Library/src/MDR32F9Qx_usb.c">
 <persistable path="/USB/Library/src/MDR32F9Qx_usb.c"/>
 </file>
-<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.h" tooltip="C:\USB\main.h">
-<persistable path="C:\USB\main.h" project="USB"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="MDR32F9x.h" tooltip="CHOICE/cmsis/MDR32F9x.h">
+<persistable path="/CHOICE/cmsis/MDR32F9x.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_MDR32F9x.c" tooltip="CHOICE/cmsisboot/startup/startup_MDR32F9x.c">
+<persistable path="/CHOICE/cmsisboot/startup/startup_MDR32F9x.c"/>
 </file>
 </mruList>
 </workbench>
