@@ -32,7 +32,7 @@ USB_Clock_InitStruct
                     0x8               ..\obj\main.o
 PORT_InitStructure  0xc               ..\obj\main.o
 DMA_ControlTable    0x400             ..\obj\MDR32F9Qx_dma.o
-RxUSB_Buffer        0xa               ..\obj\main.o
+RxUSB_Buffer        0xb               ..\obj\main.o
 
 Discarded input sections
 
@@ -1102,7 +1102,7 @@ LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m/crt0.o
                 0x20008000                _eram = 0x20008000
 
-.text           0x08000000     0x1bdc
+.text           0x08000000     0x1bd0
  *(.isr_vector)
  .isr_vector    0x08000000       0xc0 ..\obj\startup_MDR32F9x.o
                 0x08000000                g_pfnVectors
@@ -1117,228 +1117,228 @@ LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib
                 0x080001b8       0xb4 ..\obj\main.o
                 0x080001b8                TxUSB_Constructor
  .text.Command_Handler
-                0x0800026c       0x98 ..\obj\main.o
+                0x0800026c       0x88 ..\obj\main.o
                 0x0800026c                Command_Handler
  .text.PortD_Init
-                0x08000304       0x54 ..\obj\main.o
-                0x08000304                PortD_Init
+                0x080002f4       0x54 ..\obj\main.o
+                0x080002f4                PortD_Init
  .text.VCom_Configuration
-                0x08000358       0x2c ..\obj\main.o
+                0x08000348       0x2c ..\obj\main.o
  .text.Setup_USB
-                0x08000384       0x54 ..\obj\main.o
-                0x08000384                Setup_USB
+                0x08000374       0x54 ..\obj\main.o
+                0x08000374                Setup_USB
  .text.PLL_init
-                0x080003d8       0x58 ..\obj\main.o
-                0x080003d8                PLL_init
+                0x080003c8       0x58 ..\obj\main.o
+                0x080003c8                PLL_init
  .text.Port_init
-                0x08000430       0x40 ..\obj\main.o
-                0x08000430                Port_init
- .text.main     0x08000470       0x2c ..\obj\main.o
-                0x08000470                main
+                0x08000420       0x40 ..\obj\main.o
+                0x08000420                Port_init
+ .text.main     0x08000460       0x2c ..\obj\main.o
+                0x08000460                main
  .text.USB_CDC_RecieveData
-                0x0800049c       0x4c ..\obj\main.o
-                0x0800049c                USB_CDC_RecieveData
+                0x0800048c       0x50 ..\obj\main.o
+                0x0800048c                USB_CDC_RecieveData
  .text.USB_BRGInit
-                0x080004e8       0x6c ..\obj\MDR32F9Qx_usb.o
-                0x080004e8                USB_BRGInit
+                0x080004dc       0x6c ..\obj\MDR32F9Qx_usb.o
+                0x080004dc                USB_BRGInit
  .text.USB_Reset
-                0x08000554       0x30 ..\obj\MDR32F9Qx_usb.o
-                0x08000554                USB_Reset
+                0x08000548       0x30 ..\obj\MDR32F9Qx_usb.o
+                0x08000548                USB_Reset
  .text.USB_SetHSCR
-                0x08000584       0x3c ..\obj\MDR32F9Qx_usb.o
-                0x08000584                USB_SetHSCR
+                0x08000578       0x3c ..\obj\MDR32F9Qx_usb.o
+                0x08000578                USB_SetHSCR
  .text.USB_GetSEPxCTRL
-                0x080005c0       0x24 ..\obj\MDR32F9Qx_usb.o
-                0x080005c0                USB_GetSEPxCTRL
+                0x080005b4       0x24 ..\obj\MDR32F9Qx_usb.o
+                0x080005b4                USB_GetSEPxCTRL
  .text.USB_SetSEPxCTRL
-                0x080005e4       0x4c ..\obj\MDR32F9Qx_usb.o
-                0x080005e4                USB_SetSEPxCTRL
+                0x080005d8       0x4c ..\obj\MDR32F9Qx_usb.o
+                0x080005d8                USB_SetSEPxCTRL
  .text.USB_GetSEPxSTS
-                0x08000630       0x28 ..\obj\MDR32F9Qx_usb.o
-                0x08000630                USB_GetSEPxSTS
+                0x08000624       0x28 ..\obj\MDR32F9Qx_usb.o
+                0x08000624                USB_GetSEPxSTS
  .text.USB_GetSEPxTS
-                0x08000658       0x28 ..\obj\MDR32F9Qx_usb.o
-                0x08000658                USB_GetSEPxTS
+                0x0800064c       0x28 ..\obj\MDR32F9Qx_usb.o
+                0x0800064c                USB_GetSEPxTS
  .text.USB_SetSC
-                0x08000680       0x3c ..\obj\MDR32F9Qx_usb.o
-                0x08000680                USB_SetSC
+                0x08000674       0x3c ..\obj\MDR32F9Qx_usb.o
+                0x08000674                USB_SetSC
  .text.USB_GetSIS
-                0x080006bc       0x18 ..\obj\MDR32F9Qx_usb.o
-                0x080006bc                USB_GetSIS
+                0x080006b0       0x18 ..\obj\MDR32F9Qx_usb.o
+                0x080006b0                USB_GetSIS
  .text.USB_SetSIS
-                0x080006d4       0x20 ..\obj\MDR32F9Qx_usb.o
-                0x080006d4                USB_SetSIS
+                0x080006c8       0x20 ..\obj\MDR32F9Qx_usb.o
+                0x080006c8                USB_SetSIS
  .text.USB_SetSIM
-                0x080006f4       0x3c ..\obj\MDR32F9Qx_usb.o
-                0x080006f4                USB_SetSIM
+                0x080006e8       0x3c ..\obj\MDR32F9Qx_usb.o
+                0x080006e8                USB_SetSIM
  .text.USB_SetSA
-                0x08000730       0x20 ..\obj\MDR32F9Qx_usb.o
-                0x08000730                USB_SetSA
+                0x08000724       0x20 ..\obj\MDR32F9Qx_usb.o
+                0x08000724                USB_SetSA
  .text.USB_GetSEPxRXFD
-                0x08000750       0x24 ..\obj\MDR32F9Qx_usb.o
-                0x08000750                USB_GetSEPxRXFD
+                0x08000744       0x24 ..\obj\MDR32F9Qx_usb.o
+                0x08000744                USB_GetSEPxRXFD
  .text.USB_GetSEPxRXFDC
-                0x08000774       0x28 ..\obj\MDR32F9Qx_usb.o
-                0x08000774                USB_GetSEPxRXFDC
+                0x08000768       0x28 ..\obj\MDR32F9Qx_usb.o
+                0x08000768                USB_GetSEPxRXFDC
  .text.USB_SetSEPxRXFC
-                0x0800079c       0x2c ..\obj\MDR32F9Qx_usb.o
-                0x0800079c                USB_SetSEPxRXFC
+                0x08000790       0x2c ..\obj\MDR32F9Qx_usb.o
+                0x08000790                USB_SetSEPxRXFC
  .text.USB_SetSEPxTXFD
-                0x080007c8       0x2c ..\obj\MDR32F9Qx_usb.o
-                0x080007c8                USB_SetSEPxTXFD
+                0x080007bc       0x2c ..\obj\MDR32F9Qx_usb.o
+                0x080007bc                USB_SetSEPxTXFD
  .text.USB_SetSEPxTXFDC
-                0x080007f4       0x2c ..\obj\MDR32F9Qx_usb.o
-                0x080007f4                USB_SetSEPxTXFDC
+                0x080007e8       0x2c ..\obj\MDR32F9Qx_usb.o
+                0x080007e8                USB_SetSEPxTXFDC
  .text.USB_SEPxToggleEPDATASEQ
-                0x08000820       0x3c ..\obj\MDR32F9Qx_usb.o
-                0x08000820                USB_SEPxToggleEPDATASEQ
+                0x08000814       0x3c ..\obj\MDR32F9Qx_usb.o
+                0x08000814                USB_SEPxToggleEPDATASEQ
  .text.Default_Reset_Handler
-                0x0800085c       0x60 ..\obj\startup_MDR32F9x.o
-                0x0800085c                Default_Reset_Handler
-                0x0800085c                Reset_Handler
+                0x08000850       0x60 ..\obj\startup_MDR32F9x.o
+                0x08000850                Default_Reset_Handler
+                0x08000850                Reset_Handler
  .text.Default_Handler
-                0x080008bc        0x8 ..\obj\startup_MDR32F9x.o
-                0x080008bc                DebugMon_Handler
-                0x080008bc                HardFault_Handler
-                0x080008bc                SysTick_Handler
-                0x080008bc                EXT_INT1_IRQHandler
-                0x080008bc                PendSV_Handler
-                0x080008bc                NMI_Handler
-                0x080008bc                UART1_IRQHandler
-                0x080008bc                CAN1_IRQHandler
-                0x080008bc                COMPARATOR_IRQHandler
-                0x080008bc                POWER_IRQHandler
-                0x080008bc                UsageFault_Handler
-                0x080008bc                Timer3_IRQHandler
-                0x080008bc                BACKUP_IRQHandler
-                0x080008bc                UART2_IRQHandler
-                0x080008bc                Timer2_IRQHandler
-                0x080008bc                EXT_INT2_IRQHandler
-                0x080008bc                ADC_IRQHandler
-                0x080008bc                SSP1_IRQHandler
-                0x080008bc                Timer1_IRQHandler
-                0x080008bc                EXT_INT3_IRQHandler
-                0x080008bc                I2C_IRQHandler
-                0x080008bc                MemManage_Handler
-                0x080008bc                EXT_INT4_IRQHandler
-                0x080008bc                SVC_Handler
-                0x080008bc                WWDG_IRQHandler
-                0x080008bc                SSP2_IRQHandler
-                0x080008bc                DMA_IRQHandler
-                0x080008bc                CAN2_IRQHandler
-                0x080008bc                BusFault_Handler
+                0x080008b0        0x8 ..\obj\startup_MDR32F9x.o
+                0x080008b0                DebugMon_Handler
+                0x080008b0                HardFault_Handler
+                0x080008b0                SysTick_Handler
+                0x080008b0                EXT_INT1_IRQHandler
+                0x080008b0                PendSV_Handler
+                0x080008b0                NMI_Handler
+                0x080008b0                UART1_IRQHandler
+                0x080008b0                CAN1_IRQHandler
+                0x080008b0                COMPARATOR_IRQHandler
+                0x080008b0                POWER_IRQHandler
+                0x080008b0                UsageFault_Handler
+                0x080008b0                Timer3_IRQHandler
+                0x080008b0                BACKUP_IRQHandler
+                0x080008b0                UART2_IRQHandler
+                0x080008b0                Timer2_IRQHandler
+                0x080008b0                EXT_INT2_IRQHandler
+                0x080008b0                ADC_IRQHandler
+                0x080008b0                SSP1_IRQHandler
+                0x080008b0                Timer1_IRQHandler
+                0x080008b0                EXT_INT3_IRQHandler
+                0x080008b0                I2C_IRQHandler
+                0x080008b0                MemManage_Handler
+                0x080008b0                EXT_INT4_IRQHandler
+                0x080008b0                SVC_Handler
+                0x080008b0                WWDG_IRQHandler
+                0x080008b0                SSP2_IRQHandler
+                0x080008b0                DMA_IRQHandler
+                0x080008b0                CAN2_IRQHandler
+                0x080008b0                BusFault_Handler
  .text.USB_CDC_Init
-                0x080008c4       0x3c ..\obj\MDR32F9Qx_usb_CDC.o
-                0x080008c4                USB_CDC_Init
+                0x080008b8       0x3c ..\obj\MDR32F9Qx_usb_CDC.o
+                0x080008b8                USB_CDC_Init
  .text.USB_CDC_SetReceiveBuffer
-                0x08000900       0x28 ..\obj\MDR32F9Qx_usb_CDC.o
-                0x08000900                USB_CDC_SetReceiveBuffer
+                0x080008f4       0x28 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x080008f4                USB_CDC_SetReceiveBuffer
  .text.USB_CDC_SendData
-                0x08000928       0x40 ..\obj\MDR32F9Qx_usb_CDC.o
-                0x08000928                USB_CDC_SendData
+                0x0800091c       0x40 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x0800091c                USB_CDC_SendData
  .text.USB_CDC_Reset
-                0x08000968       0x64 ..\obj\MDR32F9Qx_usb_CDC.o
-                0x08000968                USB_CDC_Reset
+                0x0800095c       0x64 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x0800095c                USB_CDC_Reset
  .text.USB_CDC_GetDescriptor
-                0x080009cc       0x88 ..\obj\MDR32F9Qx_usb_CDC.o
-                0x080009cc                USB_CDC_GetDescriptor
+                0x080009c0       0x88 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x080009c0                USB_CDC_GetDescriptor
  .text.USB_CDC_ClassRequest
-                0x08000a54       0xc8 ..\obj\MDR32F9Qx_usb_CDC.o
-                0x08000a54                USB_CDC_ClassRequest
+                0x08000a48       0xc8 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x08000a48                USB_CDC_ClassRequest
  .text.USB_CDC_OnDataSent
-                0x08000b1c       0x24 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x08000b10       0x24 ..\obj\MDR32F9Qx_usb_CDC.o
  .text.USB_CDC_OnDataReceive
-                0x08000b40       0x58 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x08000b34       0x58 ..\obj\MDR32F9Qx_usb_CDC.o
  .text.USB_CDC_DoDataOut
-                0x08000b98       0x44 ..\obj\MDR32F9Qx_usb_CDC.o
+                0x08000b8c       0x44 ..\obj\MDR32F9Qx_usb_CDC.o
  .text.SystemCoreClockUpdate
-                0x08000bdc       0xbc ..\obj\system_MDR32F9Qx.o
-                0x08000bdc                SystemCoreClockUpdate
+                0x08000bd0       0xbc ..\obj\system_MDR32F9Qx.o
+                0x08000bd0                SystemCoreClockUpdate
  .text.SystemInit
-                0x08000c98       0x4c ..\obj\system_MDR32F9Qx.o
-                0x08000c98                SystemInit
+                0x08000c8c       0x4c ..\obj\system_MDR32F9Qx.o
+                0x08000c8c                SystemInit
  .text.PORT_Init
-                0x08000ce4      0x17c ..\obj\MDR32F9Qx_port.o
-                0x08000ce4                PORT_Init
+                0x08000cd8      0x17c ..\obj\MDR32F9Qx_port.o
+                0x08000cd8                PORT_Init
  .text.RST_CLK_PCLKcmd
-                0x08000e60       0x3c ..\obj\MDR32F9Qx_rst_clk.o
-                0x08000e60                RST_CLK_PCLKcmd
+                0x08000e54       0x3c ..\obj\MDR32F9Qx_rst_clk.o
+                0x08000e54                RST_CLK_PCLKcmd
  .text.NVIC_EnableIRQ
-                0x08000e9c       0x30 ..\obj\MDR32F9Qx_usb_device.o
+                0x08000e90       0x30 ..\obj\MDR32F9Qx_usb_device.o
  .text.NVIC_DisableIRQ
-                0x08000ecc       0x34 ..\obj\MDR32F9Qx_usb_device.o
+                0x08000ec0       0x34 ..\obj\MDR32F9Qx_usb_device.o
  .text.USB_EP_Init
-                0x08000f00       0x7c ..\obj\MDR32F9Qx_usb_device.o
-                0x08000f00                USB_EP_Init
+                0x08000ef4       0x7c ..\obj\MDR32F9Qx_usb_device.o
+                0x08000ef4                USB_EP_Init
  .text.USB_EP_Idle
-                0x08000f7c       0x64 ..\obj\MDR32F9Qx_usb_device.o
-                0x08000f7c                USB_EP_Idle
+                0x08000f70       0x64 ..\obj\MDR32F9Qx_usb_device.o
+                0x08000f70                USB_EP_Idle
  .text.USB_EP_Stall
-                0x08000fe0       0x68 ..\obj\MDR32F9Qx_usb_device.o
-                0x08000fe0                USB_EP_Stall
+                0x08000fd4       0x68 ..\obj\MDR32F9Qx_usb_device.o
+                0x08000fd4                USB_EP_Stall
  .text.USB_EP_doDataIn
-                0x08001048       0x6c ..\obj\MDR32F9Qx_usb_device.o
-                0x08001048                USB_EP_doDataIn
+                0x0800103c       0x6c ..\obj\MDR32F9Qx_usb_device.o
+                0x0800103c                USB_EP_doDataIn
  .text.USB_EP_doDataOut
-                0x080010b4       0x58 ..\obj\MDR32F9Qx_usb_device.o
-                0x080010b4                USB_EP_doDataOut
+                0x080010a8       0x58 ..\obj\MDR32F9Qx_usb_device.o
+                0x080010a8                USB_EP_doDataOut
  .text.USB_EP_setSetupHandler
-                0x0800110c       0x64 ..\obj\MDR32F9Qx_usb_device.o
-                0x0800110c                USB_EP_setSetupHandler
+                0x08001100       0x64 ..\obj\MDR32F9Qx_usb_device.o
+                0x08001100                USB_EP_setSetupHandler
  .text.USB_EP_dispatchEvent
-                0x08001170      0x394 ..\obj\MDR32F9Qx_usb_device.o
-                0x08001170                USB_EP_dispatchEvent
+                0x08001164      0x394 ..\obj\MDR32F9Qx_usb_device.o
+                0x08001164                USB_EP_dispatchEvent
  .text.USB_EP_sendInDataPortion
-                0x08001504       0xa4 ..\obj\MDR32F9Qx_usb_device.o
+                0x080014f8       0xa4 ..\obj\MDR32F9Qx_usb_device.o
  .text.USB_EP_SetReady
-                0x080015a8       0x3c ..\obj\MDR32F9Qx_usb_device.o
+                0x0800159c       0x3c ..\obj\MDR32F9Qx_usb_device.o
  .text.USB_DeviceInit
-                0x080015e4       0x70 ..\obj\MDR32F9Qx_usb_device.o
-                0x080015e4                USB_DeviceInit
+                0x080015d8       0x70 ..\obj\MDR32F9Qx_usb_device.o
+                0x080015d8                USB_DeviceInit
  .text.USB_DevicePowerOn
-                0x08001654       0x1c ..\obj\MDR32F9Qx_usb_device.o
-                0x08001654                USB_DevicePowerOn
+                0x08001648       0x1c ..\obj\MDR32F9Qx_usb_device.o
+                0x08001648                USB_DevicePowerOn
  .text.USB_DeviceReset
-                0x08001670       0x18 ..\obj\MDR32F9Qx_usb_device.o
-                0x08001670                USB_DeviceReset
+                0x08001664       0x18 ..\obj\MDR32F9Qx_usb_device.o
+                0x08001664                USB_DeviceReset
  .text.USB_DeviceSetupPacket
-                0x08001688      0x2f4 ..\obj\MDR32F9Qx_usb_device.o
-                0x08001688                USB_DeviceSetupPacket
+                0x0800167c      0x2f4 ..\obj\MDR32F9Qx_usb_device.o
+                0x0800167c                USB_DeviceSetupPacket
  .text.USB_DeviceClearFeature
-                0x0800197c       0x38 ..\obj\MDR32F9Qx_usb_device.o
-                0x0800197c                USB_DeviceClearFeature
+                0x08001970       0x38 ..\obj\MDR32F9Qx_usb_device.o
+                0x08001970                USB_DeviceClearFeature
  .text.USB_DeviceSetFeature
-                0x080019b4       0x38 ..\obj\MDR32F9Qx_usb_device.o
-                0x080019b4                USB_DeviceSetFeature
+                0x080019a8       0x38 ..\obj\MDR32F9Qx_usb_device.o
+                0x080019a8                USB_DeviceSetFeature
  .text.USB_DeviceDoStatusOutAck
-                0x080019ec       0x24 ..\obj\MDR32F9Qx_usb_device.o
-                0x080019ec                USB_DeviceDoStatusOutAck
+                0x080019e0       0x24 ..\obj\MDR32F9Qx_usb_device.o
+                0x080019e0                USB_DeviceDoStatusOutAck
  .text.USB_Device_setAddressWork
-                0x08001a10       0x38 ..\obj\MDR32F9Qx_usb_device.o
+                0x08001a04       0x38 ..\obj\MDR32F9Qx_usb_device.o
  .text.USB_DeviceDispatchEvent
-                0x08001a48       0x7c ..\obj\MDR32F9Qx_usb_device.o
-                0x08001a48                USB_DeviceDispatchEvent
+                0x08001a3c       0x7c ..\obj\MDR32F9Qx_usb_device.o
+                0x08001a3c                USB_DeviceDispatchEvent
  .text.USB_IRQHandler
-                0x08001ac4        0xc ..\obj\MDR32F9Qx_usb_device.o
-                0x08001ac4                USB_IRQHandler
+                0x08001ab8        0xc ..\obj\MDR32F9Qx_usb_device.o
+                0x08001ab8                USB_IRQHandler
  .text.startup.register_fini
-                0x08001ad0       0x14 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
- .text.atexit   0x08001ae4        0xc c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
-                0x08001ae4                atexit
+                0x08001ac4       0x14 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
+ .text.atexit   0x08001ad8        0xc c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
+                0x08001ad8                atexit
  .text.__libc_fini_array
-                0x08001af0       0x28 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
-                0x08001af0                __libc_fini_array
+                0x08001ae4       0x28 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
+                0x08001ae4                __libc_fini_array
  .text.__register_exitproc
-                0x08001b18       0xa4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
-                0x08001b18                __register_exitproc
+                0x08001b0c       0xa4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
+                0x08001b0c                __register_exitproc
  *(.init)
- .init          0x08001bbc        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x08001bbc                _init
- .init          0x08001bc0        0x8 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+ .init          0x08001bb0        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x08001bb0                _init
+ .init          0x08001bb4        0x8 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
  *(.fini)
- .fini          0x08001bc8        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x08001bc8                _fini
- .fini          0x08001bcc        0x8 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+ .fini          0x08001bbc        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x08001bbc                _fini
+ .fini          0x08001bc0        0x8 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -1351,45 +1351,45 @@ LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib
  *(.dtors)
  *(.rodata*)
  .rodata.str1.4
-                0x08001bd4        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
+                0x08001bc8        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
                                   0x2 (size before relaxing)
  .rodata._global_impure_ptr
-                0x08001bd8        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
-                0x08001bd8                _global_impure_ptr
+                0x08001bcc        0x4 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
+                0x08001bcc                _global_impure_ptr
  *(.eh_fram e*)
 
-.eh_frame       0x08001bdc        0x0
- .eh_frame      0x08001bdc        0x0 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.eh_frame       0x08001bd0        0x0
+ .eh_frame      0x08001bd0        0x0 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.glue_7         0x08001bdc        0x0
- .glue_7        0x08001bdc        0x0 linker stubs
+.glue_7         0x08001bd0        0x0
+ .glue_7        0x08001bd0        0x0 linker stubs
 
-.glue_7t        0x08001bdc        0x0
- .glue_7t       0x08001bdc        0x0 linker stubs
+.glue_7t        0x08001bd0        0x0
+ .glue_7t       0x08001bd0        0x0 linker stubs
 
-.vfp11_veneer   0x08001bdc        0x0
- .vfp11_veneer  0x08001bdc        0x0 linker stubs
+.vfp11_veneer   0x08001bd0        0x0
+ .vfp11_veneer  0x08001bd0        0x0 linker stubs
 
-.v4_bx          0x08001bdc        0x0
- .v4_bx         0x08001bdc        0x0 linker stubs
+.v4_bx          0x08001bd0        0x0
+ .v4_bx         0x08001bd0        0x0 linker stubs
 
-.iplt           0x08001bdc        0x0
- .iplt          0x08001bdc        0x0 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.iplt           0x08001bd0        0x0
+ .iplt          0x08001bd0        0x0 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.rel.dyn        0x08001bdc        0x0
- .rel.iplt      0x08001bdc        0x0 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.rel.dyn        0x08001bd0        0x0
+ .rel.iplt      0x08001bd0        0x0 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08001bdc                __exidx_start = .
+                0x08001bd0                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x08001bdc                __exidx_end = .
-                0x08001bdc                __etext = .
-                0x08001bdc                _sidata = __etext
+                0x08001bd0                __exidx_end = .
+                0x08001bd0                __etext = .
+                0x08001bd0                _sidata = __etext
 
-.data           0x20000000      0x498 load address 0x08001bdc
+.data           0x20000000      0x498 load address 0x08001bd0
                 0x20000000                __data_start__ = .
                 0x20000000                _sdata = __data_start__
  *(vtable)
@@ -1426,10 +1426,10 @@ LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib
                 0x20000498                __data_end__ = .
                 0x20000498                _edata = __data_end__
 
-.igot.plt       0x20000498        0x0 load address 0x08002074
+.igot.plt       0x20000498        0x0 load address 0x08002068
  .igot.plt      0x20000498        0x0 c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.bss            0x20000498      0x1c4 load address 0x08002074
+.bss            0x20000498      0x1c4 load address 0x08002068
                 0x20000498                . = ALIGN (0x4)
                 0x20000498                __bss_start__ = .
                 0x20000498                _sbss = __bss_start__
@@ -1439,7 +1439,7 @@ LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib
  .bss           0x20000534       0x14 ..\obj\MDR32F9Qx_usb_CDC.o
  .bss           0x20000548        0x8 ..\obj\MDR32F9Qx_usb_device.o
  *(COMMON)
- COMMON         0x20000550       0x46 ..\obj\main.o
+ COMMON         0x20000550       0x47 ..\obj\main.o
                 0x20000550                cnt
                 0x20000554                USB_DeviceBUSParam
                 0x20000560                previous_task
@@ -1447,7 +1447,7 @@ LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib
                 0x20000578                USB_Clock_InitStruct
                 0x20000580                PORT_InitStructure
                 0x2000058c                RxUSB_Buffer
- *fill*         0x20000596        0x2 
+ *fill*         0x20000597        0x1 
  COMMON         0x20000598       0xc4 ..\obj\MDR32F9Qx_usb_device.o
                 0x20000598                USB_DeviceContext
                 0x200005a4                USB_CurrentSetupPacket
@@ -1463,7 +1463,7 @@ LOAD c:/gnu arm/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib
  *(.heap*)
                 0x2000065c                __HeapLimit = .
 
-.co_stack       0x2000065c     0x2004 load address 0x08002238
+.co_stack       0x2000065c     0x2004 load address 0x0800222c
                 0x20000660                . = ALIGN (0x8)
  *fill*         0x2000065c        0x4 
  *(.co_stack .co_stack.*)
@@ -1558,15 +1558,15 @@ OUTPUT(USB.elf elf32-littlearm)
  .comment       0x0000006e       0x6f ..\obj\MDR32F9Qx_rst_clk.o
  .comment       0x0000006e       0x6f ..\obj\MDR32F9Qx_usb_device.o
 
-.debug_info     0x00000000     0x460b
- .debug_info    0x00000000      0xb4b ..\obj\main.o
- .debug_info    0x00000b4b      0xe19 ..\obj\MDR32F9Qx_usb.o
- .debug_info    0x00001964       0xee ..\obj\startup_MDR32F9x.o
- .debug_info    0x00001a52      0x77d ..\obj\MDR32F9Qx_usb_CDC.o
- .debug_info    0x000021cf      0x1d3 ..\obj\system_MDR32F9Qx.o
- .debug_info    0x000023a2      0x5f1 ..\obj\MDR32F9Qx_port.o
- .debug_info    0x00002993      0xac9 ..\obj\MDR32F9Qx_rst_clk.o
- .debug_info    0x0000345c     0x11af ..\obj\MDR32F9Qx_usb_device.o
+.debug_info     0x00000000     0x45fb
+ .debug_info    0x00000000      0xb3b ..\obj\main.o
+ .debug_info    0x00000b3b      0xe19 ..\obj\MDR32F9Qx_usb.o
+ .debug_info    0x00001954       0xee ..\obj\startup_MDR32F9x.o
+ .debug_info    0x00001a42      0x77d ..\obj\MDR32F9Qx_usb_CDC.o
+ .debug_info    0x000021bf      0x1d3 ..\obj\system_MDR32F9Qx.o
+ .debug_info    0x00002392      0x5f1 ..\obj\MDR32F9Qx_port.o
+ .debug_info    0x00002983      0xac9 ..\obj\MDR32F9Qx_rst_clk.o
+ .debug_info    0x0000344c     0x11af ..\obj\MDR32F9Qx_usb_device.o
 
 .debug_abbrev   0x00000000      0xdae
  .debug_abbrev  0x00000000      0x2c7 ..\obj\main.o
@@ -1606,15 +1606,15 @@ OUTPUT(USB.elf elf32-littlearm)
  .debug_ranges  0x00000368      0x118 ..\obj\MDR32F9Qx_rst_clk.o
  .debug_ranges  0x00000480      0x150 ..\obj\MDR32F9Qx_usb_device.o
 
-.debug_line     0x00000000     0x1a31
- .debug_line    0x00000000      0x2ed ..\obj\main.o
- .debug_line    0x000002ed      0x565 ..\obj\MDR32F9Qx_usb.o
- .debug_line    0x00000852       0x7f ..\obj\startup_MDR32F9x.o
- .debug_line    0x000008d1      0x2e9 ..\obj\MDR32F9Qx_usb_CDC.o
- .debug_line    0x00000bba      0x107 ..\obj\system_MDR32F9Qx.o
- .debug_line    0x00000cc1      0x1ff ..\obj\MDR32F9Qx_port.o
- .debug_line    0x00000ec0      0x4a5 ..\obj\MDR32F9Qx_rst_clk.o
- .debug_line    0x00001365      0x6cc ..\obj\MDR32F9Qx_usb_device.o
+.debug_line     0x00000000     0x1a2f
+ .debug_line    0x00000000      0x2eb ..\obj\main.o
+ .debug_line    0x000002eb      0x565 ..\obj\MDR32F9Qx_usb.o
+ .debug_line    0x00000850       0x7f ..\obj\startup_MDR32F9x.o
+ .debug_line    0x000008cf      0x2e9 ..\obj\MDR32F9Qx_usb_CDC.o
+ .debug_line    0x00000bb8      0x107 ..\obj\system_MDR32F9Qx.o
+ .debug_line    0x00000cbf      0x1ff ..\obj\MDR32F9Qx_port.o
+ .debug_line    0x00000ebe      0x4a5 ..\obj\MDR32F9Qx_rst_clk.o
+ .debug_line    0x00001363      0x6cc ..\obj\MDR32F9Qx_usb_device.o
 
 .debug_str      0x00000000     0x23f2
  .debug_str     0x00000000      0x8f9 ..\obj\main.o

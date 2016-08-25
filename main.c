@@ -23,7 +23,7 @@ typedef struct
 
 } ParseRxMessage;
 
-uint8_t RxUSB_Buffer[10];	  //Буфер приема сообщений от ПК
+uint8_t RxUSB_Buffer[11];	  		  //Буфер приема сообщений от ПК
 ParseRxMessage task;                  //Текущая команда от ПК: начать набор, остановить, сброс
 ParseRxMessage previous_task;		  //Предыдущая команда от ПК
 
@@ -82,10 +82,6 @@ void Command_Handler(uint8_t *outBuffer, ParseRxMessage RxMessage)
 
 	previous_task = task;
 	task = RxMessage;
-
-	if (task.CommandData == previous_task.CommandData) {
-		return;
-	}
 
 	TxUSB_Constructor(outBuffer, task, previous_task);
 
@@ -265,7 +261,7 @@ USB_Result USB_CDC_RecieveData(uint8_t* Buffer, uint32_t Length)
 {
 	//USB_Buf[cnt++] = Buffer[0];
 
-	ParseRxMessage rxMessage = RxParser(Buffer);
+	ParseRxMessage rxMessage = RxParser(RxUSB_Buffer);
 	uint8_t sendBuffer[11] = {0};
 	Command_Handler(&sendBuffer[0], rxMessage);  // -&
 
