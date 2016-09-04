@@ -102,7 +102,132 @@ void Command_Handler(uint8_t *outBuffer, ParseRxMessage RxMessage)
 	TxUSB_Constructor(outBuffer, task, previous_task);
 }
 
-//Инициализация PD3 для работы
+//===============================================================Инициализация таймера для прерывания по стробу================================================
+void PortB_Init()
+{
+	RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTB, ENABLE); // вкл тактирование от HSI
+
+		/* Reset PORTB settings */
+			  PORT_DeInit(MDR_PORTB);
+
+			  // инициализируем PB5 как вход таймера _____________________________ ВОЗМОЖНО В ИНИЦИАЛИЗАЦИИ ЛИШНИЕ ПАРАМЕТРЫ !!!
+		  	PORT_InitStructure.PORT_Pin = PORT_Pin_5;
+		 	PORT_InitStructure.PORT_FUNC = PORT_FUNC_OVERRID;
+		  	PORT_InitStructure.PORT_GFEN = PORT_GFEN_OFF;
+		  	PORT_InitStructure.PORT_PULL_UP = PORT_PULL_UP_OFF;
+		  	PORT_InitStructure.PORT_MODE = PORT_MODE_DIGITAL;
+		  	PORT_InitStructure.PORT_SPEED = PORT_SPEED_MAXFAST;
+		  	PORT_InitStructure.PORT_OE = PORT_OE_IN;
+		  	PORT_Init(MDR_PORTB, &PORT_InitStructure);
+}
+
+
+void Timer_init(void)
+{
+		RST_CLK_PCLKcmd(RST_CLK_PCLK_TIMER3, ENABLE);
+
+		TIMER_CntInitTypeDef Timer_Cnt_InitStructure;
+		TIMER_ChnInitTypeDef Timer_Chn_InitStructure;
+
+		TIMER_DeInit(MDR_TIMER3);
+
+		TIMER_BRGInit(MDR_TIMER1, TIMER_HCLKdiv1);
+
+		  /* Initializes the TIMERx Counter ------------------------------------*/
+		Timer_Cnt_InitStructure.TIMER_Prescaler                = 0x0;
+		Timer_Cnt_InitStructure.TIMER_Period                   = 0x4F;
+		Timer_Cnt_InitStructure.TIMER_CounterMode              = TIMER_CntMode_ClkFixedDir; /** Таймер изменяет значение TIMERx_CNT. Направление счета не изменяется. */
+		Timer_Cnt_InitStructure.TIMER_CounterDirection         = TIMER_CntDir_Up; /** Считаем вверх */
+		Timer_Cnt_InitStructure.TIMER_EventSource              = TIMER_EvSrc_None;
+		Timer_Cnt_InitStructure.TIMER_FilterSampling           = TIMER_FDTS_TIMER_CLK_div_1;
+		Timer_Cnt_InitStructure.TIMER_ARR_UpdateMode           = TIMER_ARR_Update_Immediately;
+		Timer_Cnt_InitStructure.TIMER_ETR_FilterConf           = TIMER_Filter_1FF_at_TIMER_CLK;
+		Timer_Cnt_InitStructure.TIMER_ETR_Prescaler            = TIMER_ETR_Prescaler_None;
+		Timer_Cnt_InitStructure.TIMER_ETR_Polarity             = TIMER_ETRPolarity_NonInverted;
+		Timer_Cnt_InitStructure.TIMER_BRK_Polarity             = TIMER_BRKPolarity_NonInverted;
+		  TIMER_CntInit (MDR_TIMER1, &Timer_Cnt_InitStructure);
+
+		    /* Initializes the TIMER1 Channel1 -------------------------------------*/
+		  TIMER_ChnStructInit(&timer_chn_init);
+		  timer_chn_init.TIMER_CH_Prescaler           = TIMER_CH_Prescaler_None; /** Делитель частоты выключен, канал работает на частоте TIM_CLK*/
+		  timer_chn_init.TIMER_CH_CCR1_EventSource    = TIMER_CH_CCR1EvSrc_NE; /** Отрицательный фронт для события для CCR1 */
+		  timer_chn_init.TIMER_CH_CCR_UpdateMode      = TIMER_CH_CCR_Update_Immediately; /** Регистры CCR и CCR1 обновляются немедленно */
+		  timer_chn_init.TIMER_CH_EventSource         = TIMER_CH_EvSrc_NE; /** Отрицательный фронт для события для CCR */
+		  timer_chn_init.TIMER_CH_FilterConf          = TIMER_Filter_1FF_at_TIMER_CLK;
+		  timer_chn_init.TIMER_CH_Number              = TIMER_CHANNEL1;
+		  timer_chn_init.TIMER_CH_Mode                = TIMER_CH_MODE_CAPTURE; /** Режим работы таймера - захват */
+		  TIMER_ChnInit(MDR_TIMER1, &timer_chn_init);
+
+		  /* Initializes the TIMER1 Channel2 -------------------------------------*/
+		  TIMER_ChnStructInit(&timer_chn_init);
+		  timer_chn_init.TIMER_CH_Prescaler           = TIMER_CH_Prescaler_None; /** Делитель частоты выключен, канал работает на частоте TIM_CLK*/
+		  timer_chn_init.TIMER_CH_CCR1_EventSource    = TIMER_CH_CCR1EvSrc_NE; /** Отрицательный фронт для события для CCR1 */
+		  timer_chn_init.TIMER_CH_CCR_UpdateMode      = TIMER_CH_CCR_Update_Immediately; /** Регистры CCR и CCR1 обновляются немедленно */
+		  timer_chn_init.TIMER_CH_EventSource         = TIMER_CH_EvSrc_NE; /** Отрицательный фронт для события для CCR */
+		  timer_chn_init.TIMER_CH_FilterConf          = TIMER_Filter_4FF_at_TIMER_CLK;
+		  timer_chn_init.TIMER_CH_Number              = TIMER_CHANNEL2;
+		  timer_chn_init.TIMER_CH_Mode                = TIMER_CH_MODE_CAPTURE; /** Режим работы таймера - захват */
+		  TIMER_ChnInit(MDR_TIMER1, &timer_chn_init);
+
+		  NVIC_EnableIRQ(Timer1_IRQn);
+
+		//==================================================================================================================================================================================
+		MDR_RST_CLK->PER_CLOCK |= 1 << 14; /** разрешение тактирования MDR_TIMER1 */
+		MDR_RST_CLK->PER_CLOCK |= 1 << 16; /** разрешение тактирования MDR_TIMER3 */
+		MDR_RST_CLK->TIM_CLOCK =( /** плак-смайл */
+		0 /** делитель тактовой частоты MDR_TIMER1 */
+		| (1 << 24) /** разешение тактирования MDR_TIMER1 */
+		| (0 << 16) /** делитель тактовой частоты MDR_TIMER3 */
+		| (1 << 26) /** разешение тактирования MDR_TIMER3 */
+		);
+
+		/** Режим захвата (для тестовой ноги с кнопкой) */
+		MDR_TIMER1->CNTRL = 0x00000000; /** Режим инициализации таймера */
+
+		/** Настраиваем работу основного счетчика */
+		MDR_TIMER1->CNT = 0x00000000; /** Начальное значение счетчика */
+		MDR_TIMER1->PSG = 0x00000000; /** Предделитель частоты */
+		MDR_TIMER1->ARR = 0x000000FF; /** Основание счета */
+		MDR_TIMER1->IE = 1<<8;
+		/** Режим работы каналов - захват */
+		MDR_TIMER1->CH4_CNTRL = 0x00008003;
+		MDR_TIMER1->CNTRL = 0x00000001; /** Счет вверх по TIM_CLK. Разрешение работы таймера */
+		NVIC_EnableIRQ(Timer1_IRQn);
+		//====================================================================================================
+		// Конфигурируем таймер для захвата сигнала
+		MDR_TIMER3->CNT = 0x00;
+		MDR_TIMER3->PSG = 0x00;
+		MDR_TIMER3->ARR = 0xffff;
+		MDR_TIMER3->CNTRL       = TIMER_CNTRL_CNT_EN;
+		MDR_TIMER3->CH1_CNTRL   = TIMER_CH_CNTRL_CAP_NPWM | 0 << TIMER_CH_CNTRL_CHSEL_Pos;
+		MDR_TIMER3->CH1_CNTRL2  = 1 << TIMER_CH_CNTRL2_CHSEL1_Pos;
+
+		TIMER_BRGInit(MDR_TIMER3, TIMER_HCLKdiv1);
+		TIMER_ITConfig(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH1 | TIMER_STATUS_CCR_CAP1_CH1, ENABLE);
+
+		NVIC_EnableIRQ(Timer3_IRQn);
+		TIMER_Cmd(MDR_TIMER3, ENABLE);
+}
+
+// прерывание таймера
+void Timer3_IRQHandler(void)
+{
+	   if(TIMER_GetFlagStatus(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH1)) // прерывание по фронту
+	   {
+
+		  TIMER_ClearFlag(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH1);
+	   }
+
+	   if(TIMER_GetFlagStatus(MDR_TIMER3, TIMER_STATUS_CCR_CAP1_CH1)) // прерывание по спаду
+	   {
+
+		  TIMER_ClearFlag(MDR_TIMER3, TIMER_STATUS_CCR_CAP1_CH1);
+	   }
+}
+
+//======================================================================================================================================
+
+//Инициализация PD3, PD2 для работы c АЦП
 void PortD_Init ()
 {
 	RST_CLK_PCLKcmd(RST_CLK_PCLK_PORTD, ENABLE); // вкл тактирование от HSI
@@ -110,9 +235,9 @@ void PortD_Init ()
 	/* Reset PORTD settings */
 		  PORT_DeInit(MDR_PORTD);
 
-		  /* Configure ADC pin: ADC7 */
-		  /* Configure PORTD pin 7 */
-		  PORT_InitStructure.PORT_Pin   = PORT_Pin_7;
+		  /* Configure ADC pin: ADC2, ADC3 */
+		  /* Configure PORTD pin 2, 3 */
+		  PORT_InitStructure.PORT_Pin   = PORT_Pin_3 | PORT_Pin_2;
 		  PORT_InitStructure.PORT_OE    = PORT_OE_IN;
 		  PORT_InitStructure.PORT_MODE  = PORT_MODE_ANALOG;
 		  PORT_Init(MDR_PORTD, &PORT_InitStructure);
@@ -120,6 +245,7 @@ void PortD_Init ()
 
 
 //============================================================================================= Инициализация АЦП ===================================================================================
+// Иниц АЦП для Термодатчика
 void ADC1_Configuration(void)
 {
 	ADC_InitTypeDef sADC;
@@ -178,15 +304,80 @@ void ADC1_Configuration(void)
 
 }
 
+// Иниц АЦП для приема импульсов
+void ADC2_Configuration(void)
+{
+	ADC_InitTypeDef sADC;
+	ADCx_InitTypeDef sADCx;
+
+		//подать тактирование на АЦП
+		RST_CLK_PCLKcmd(RST_CLK_PCLK_ADC, ENABLE);
+		RST_CLK_ADCclkSelection(RST_CLK_ADCclkCPU_C1); 					// Берем частоту с CPU_C1 = 16 МГц
+		RST_CLK_ADCclkPrescaler(RST_CLK_ADCclkDIV32); 					// Предделитель в блоке ADC_C3 ( 16 МГц / 32 = 500 КГц )
+		RST_CLK_ADCclkEnable(ENABLE);
+
+
+	/* Init NVIC */
+	  SCB->AIRCR = 0x05FA0000 | ((uint32_t)0x500);
+	  SCB->VTOR = 0x08000000;
+	  /* Disable all interrupt */
+	  NVIC->ICPR[0] = 0xFFFFFFFF;
+	  NVIC->ICER[0] = 0xFFFFFFFF;
+
+	  /* Enable ADC interrupt  */
+	  NVIC->ISER[0] = (1<<ADC_IRQn);
+
+	  /* ADC Configuration */
+	  /* Reset all ADC settings */
+	  ADC_DeInit();
+	  ADC_StructInit(&sADC);
+	  sADC.ADC_SynchronousMode      = ADC_SyncMode_Independent;
+	  sADC.ADC_StartDelay           = 0;
+	  sADC.ADC_TempSensor           = ADC_TEMP_SENSOR_Disable;
+	  sADC.ADC_TempSensorAmplifier  = ADC_TEMP_SENSOR_AMPLIFIER_Disable;
+	  sADC.ADC_TempSensorConversion = ADC_TEMP_SENSOR_CONVERSION_Disable;
+	  sADC.ADC_IntVRefConversion    = ADC_VREF_CONVERSION_Disable;			// Запретить преобразования для канала VREF (внутренней опоры)
+	  sADC.ADC_IntVRefTrimming      = 0;
+	  ADC_Init (&sADC);
+
+	  ADCx_StructInit (&sADCx);
+	  sADCx.ADC_ClockSource      = ADC_CLOCK_SOURCE_CPU;
+	  sADCx.ADC_SamplingMode     = ADC_SAMPLING_MODE_CICLIC_CONV;			// Режим циклического преобразования (несколько раз подряд)
+	  sADCx.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;
+	  sADCx.ADC_ChannelNumber    = ADC_CH_ADC2;
+	  sADCx.ADC_Channels         = 0;
+	  sADCx.ADC_LevelControl     = ADC_LEVEL_CONTROL_Disable;				// Контроль уровня входнрого напряжения (отключено)
+	  sADCx.ADC_LowLevel         = 0;
+	  sADCx.ADC_HighLevel        = 0;
+	  sADCx.ADC_VRefSource       = ADC_VREF_SOURCE_INTERNAL;				// Вид источника опроного напряжения (внутренний)
+	  sADCx.ADC_IntVRefSource    = ADC_INT_VREF_SOURCE_INEXACT;				// Вид внутреннего источника опроного напряжения (не точный)
+	  sADCx.ADC_Prescaler        = ADC_CLK_div_32768;						// Предделитель частоты тактирования АЦП
+	  sADCx.ADC_DelayGo          = 0xF;										// Задержка между запусками АЦП (максимальная)
+	  ADC1_Init (&sADCx);
+
+	  /* Enable ADC1 EOCIF and AWOIFEN interrupts */
+	  ADC1_ITConfig((ADCx_IT_END_OF_CONVERSION  | ADCx_IT_OUT_OF_RANGE), ENABLE);
+
+	  /* ADC1 enable */
+	  ADC1_Cmd (ENABLE);
+
+}
+
 
 void ADC_IRQHandler()
 {
 	int temperature_C = 0;
 	uint32_t Vtemp;
+	uint32_t Vspec;
 
-	if (ADC1_GetFlagStatus(ADC1_FLAG_END_OF_CONVERSION) == SET)				// флаг сам обнулится после чтения из буф
+	if (ADC1_GetFlagStatus(ADC1_FLAG_END_OF_CONVERSION) == SET)				// АЦП термодатчика. флаг сам обнулится после чтения из буф
 	{
 		Vtemp = ADC1_GetResult();
+	}
+
+	else if (ADC2_GetFlagStatus(ADC2_FLAG_END_OF_CONVERSION) == SET)
+	{
+		Vspec = ADC2_GetResult();
 	}
 
 }
