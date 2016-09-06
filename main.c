@@ -3,6 +3,7 @@
 #include "delays.h"
 #include "MDR32F9Qx_adc.h"
 #include "MDR32F9Qx_it.h"
+#include "MDR32F9Qx_timer.h"
 
 PORT_InitTypeDef PORT_InitStructure;
 
@@ -113,8 +114,8 @@ void PortB_Init()
 			  // инициализируем PB5 как вход таймера _____________________________ ВОЗМОЖНО В ИНИЦИАЛИЗАЦИИ ЛИШНИЕ ПАРАМЕТРЫ !!!
 		  	PORT_InitStructure.PORT_Pin = PORT_Pin_5;
 		 	PORT_InitStructure.PORT_FUNC = PORT_FUNC_OVERRID;
-		  	PORT_InitStructure.PORT_GFEN = PORT_GFEN_OFF;
-		  	PORT_InitStructure.PORT_PULL_UP = PORT_PULL_UP_OFF;
+		  	PORT_InitStructure.PORT_GFEN = PORT_GFEN_OFF;			// -?
+		  	PORT_InitStructure.PORT_PULL_UP = PORT_PULL_UP_OFF;		// -возможно подтяжки по умолчанию откл?
 		  	PORT_InitStructure.PORT_MODE = PORT_MODE_DIGITAL;
 		  	PORT_InitStructure.PORT_SPEED = PORT_SPEED_MAXFAST;
 		  	PORT_InitStructure.PORT_OE = PORT_OE_IN;
@@ -131,99 +132,40 @@ void Timer_init(void)
 
 		TIMER_DeInit(MDR_TIMER3);
 
-		TIMER_BRGInit(MDR_TIMER1, TIMER_HCLKdiv1);
+		TIMER_BRGInit(MDR_TIMER3, TIMER_HCLKdiv1);			// Initializes the TIMER3 peripheral Clock
 
-		  /* Initializes the TIMERx Counter ------------------------------------*/
-		Timer_Cnt_InitStructure.TIMER_Prescaler                = 0x0;
-		Timer_Cnt_InitStructure.TIMER_Period                   = 0x4F;
-		Timer_Cnt_InitStructure.TIMER_CounterMode              = TIMER_CntMode_ClkFixedDir; /** Таймер изменяет значение TIMERx_CNT. Направление счета не изменяется. */
-		Timer_Cnt_InitStructure.TIMER_CounterDirection         = TIMER_CntDir_Up; /** Считаем вверх */
-		Timer_Cnt_InitStructure.TIMER_EventSource              = TIMER_EvSrc_None;
-		Timer_Cnt_InitStructure.TIMER_FilterSampling           = TIMER_FDTS_TIMER_CLK_div_1;
-		Timer_Cnt_InitStructure.TIMER_ARR_UpdateMode           = TIMER_ARR_Update_Immediately;
-		Timer_Cnt_InitStructure.TIMER_ETR_FilterConf           = TIMER_Filter_1FF_at_TIMER_CLK;
-		Timer_Cnt_InitStructure.TIMER_ETR_Prescaler            = TIMER_ETR_Prescaler_None;
-		Timer_Cnt_InitStructure.TIMER_ETR_Polarity             = TIMER_ETRPolarity_NonInverted;
-		Timer_Cnt_InitStructure.TIMER_BRK_Polarity             = TIMER_BRKPolarity_NonInverted;
-		  TIMER_CntInit (MDR_TIMER1, &Timer_Cnt_InitStructure);
+		  /* Initializes the TIMERx Counter -------------------------------------*/
+		TIMER_CntStructInit(&Timer_Cnt_InitStructure);
 
-		    /* Initializes the TIMER1 Channel1 -------------------------------------*/
-		  TIMER_ChnStructInit(&timer_chn_init);
-		  timer_chn_init.TIMER_CH_Prescaler           = TIMER_CH_Prescaler_None; /** Делитель частоты выключен, канал работает на частоте TIM_CLK*/
-		  timer_chn_init.TIMER_CH_CCR1_EventSource    = TIMER_CH_CCR1EvSrc_NE; /** Отрицательный фронт для события для CCR1 */
-		  timer_chn_init.TIMER_CH_CCR_UpdateMode      = TIMER_CH_CCR_Update_Immediately; /** Регистры CCR и CCR1 обновляются немедленно */
-		  timer_chn_init.TIMER_CH_EventSource         = TIMER_CH_EvSrc_NE; /** Отрицательный фронт для события для CCR */
-		  timer_chn_init.TIMER_CH_FilterConf          = TIMER_Filter_1FF_at_TIMER_CLK;
-		  timer_chn_init.TIMER_CH_Number              = TIMER_CHANNEL1;
-		  timer_chn_init.TIMER_CH_Mode                = TIMER_CH_MODE_CAPTURE; /** Режим работы таймера - захват */
-		  TIMER_ChnInit(MDR_TIMER1, &timer_chn_init);
+		Timer_Cnt_InitStructure.TIMER_Period = 0xFFFF; 			// 0xFFFF - кроме этого все значения дефолтные, можно использовать TIMER_CntStructInit()
 
-		  /* Initializes the TIMER1 Channel2 -------------------------------------*/
-		  TIMER_ChnStructInit(&timer_chn_init);
-		  timer_chn_init.TIMER_CH_Prescaler           = TIMER_CH_Prescaler_None; /** Делитель частоты выключен, канал работает на частоте TIM_CLK*/
-		  timer_chn_init.TIMER_CH_CCR1_EventSource    = TIMER_CH_CCR1EvSrc_NE; /** Отрицательный фронт для события для CCR1 */
-		  timer_chn_init.TIMER_CH_CCR_UpdateMode      = TIMER_CH_CCR_Update_Immediately; /** Регистры CCR и CCR1 обновляются немедленно */
-		  timer_chn_init.TIMER_CH_EventSource         = TIMER_CH_EvSrc_NE; /** Отрицательный фронт для события для CCR */
-		  timer_chn_init.TIMER_CH_FilterConf          = TIMER_Filter_4FF_at_TIMER_CLK;
-		  timer_chn_init.TIMER_CH_Number              = TIMER_CHANNEL2;
-		  timer_chn_init.TIMER_CH_Mode                = TIMER_CH_MODE_CAPTURE; /** Режим работы таймера - захват */
-		  TIMER_ChnInit(MDR_TIMER1, &timer_chn_init);
+		TIMER_CntInit (MDR_TIMER3, &Timer_Cnt_InitStructure);
 
-		  NVIC_EnableIRQ(Timer1_IRQn);
+		TIMER_ITConfig (MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH3 | TIMER_STATUS_ETR_FALLING_EDGE, ENABLE);
 
-		//==================================================================================================================================================================================
-		MDR_RST_CLK->PER_CLOCK |= 1 << 14; /** разрешение тактирования MDR_TIMER1 */
-		MDR_RST_CLK->PER_CLOCK |= 1 << 16; /** разрешение тактирования MDR_TIMER3 */
-		MDR_RST_CLK->TIM_CLOCK =( /** плак-смайл */
-		0 /** делитель тактовой частоты MDR_TIMER1 */
-		| (1 << 24) /** разешение тактирования MDR_TIMER1 */
-		| (0 << 16) /** делитель тактовой частоты MDR_TIMER3 */
-		| (1 << 26) /** разешение тактирования MDR_TIMER3 */
-		);
-
-		/** Режим захвата (для тестовой ноги с кнопкой) */
-		MDR_TIMER1->CNTRL = 0x00000000; /** Режим инициализации таймера */
-
-		/** Настраиваем работу основного счетчика */
-		MDR_TIMER1->CNT = 0x00000000; /** Начальное значение счетчика */
-		MDR_TIMER1->PSG = 0x00000000; /** Предделитель частоты */
-		MDR_TIMER1->ARR = 0x000000FF; /** Основание счета */
-		MDR_TIMER1->IE = 1<<8;
+		/* Initializes the TIMER3 Channel3 -------------------------------------*/
+		TIMER_ChnStructInit(&Timer_Chn_InitStructure);
 		/** Режим работы каналов - захват */
-		MDR_TIMER1->CH4_CNTRL = 0x00008003;
-		MDR_TIMER1->CNTRL = 0x00000001; /** Счет вверх по TIM_CLK. Разрешение работы таймера */
-		NVIC_EnableIRQ(Timer1_IRQn);
-		//====================================================================================================
-		// Конфигурируем таймер для захвата сигнала
-		MDR_TIMER3->CNT = 0x00;
-		MDR_TIMER3->PSG = 0x00;
-		MDR_TIMER3->ARR = 0xffff;
-		MDR_TIMER3->CNTRL       = TIMER_CNTRL_CNT_EN;
-		MDR_TIMER3->CH1_CNTRL   = TIMER_CH_CNTRL_CAP_NPWM | 0 << TIMER_CH_CNTRL_CHSEL_Pos;
-		MDR_TIMER3->CH1_CNTRL2  = 1 << TIMER_CH_CNTRL2_CHSEL1_Pos;
+		Timer_Chn_InitStructure.TIMER_CH_Number              = TIMER_CHANNEL3;
+		Timer_Chn_InitStructure.TIMER_CH_Mode                = TIMER_CH_MODE_CAPTURE; /** Режим работы таймера - захват */
+		Timer_Chn_InitStructure.TIMER_CH_EventSource         = TIMER_CH_EvSrc_NE; /** Отрицательный фронт для события для CCR */
 
-		TIMER_BRGInit(MDR_TIMER3, TIMER_HCLKdiv1);
-		TIMER_ITConfig(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH1 | TIMER_STATUS_CCR_CAP1_CH1, ENABLE);
+		  TIMER_ChnInit(MDR_TIMER3, &Timer_Chn_InitStructure);
 
-		NVIC_EnableIRQ(Timer3_IRQn);
-		TIMER_Cmd(MDR_TIMER3, ENABLE);
+		  NVIC_EnableIRQ(Timer3_IRQn);
+
 }
 
-// прерывание таймера
-void Timer3_IRQHandler(void)
-{
-	   if(TIMER_GetFlagStatus(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH1)) // прерывание по фронту
+		 // прерывание таймера
+	void Timer3_IRQHandler(void)
+	{
+
+	   if(TIMER_GetFlagStatus(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH3 )) // прерывание по спаду
 	   {
-
-		  TIMER_ClearFlag(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH1);
+		   ADC2_Start();												// Включили АЦП
+		  TIMER_ClearFlag(MDR_TIMER3, TIMER_STATUS_CCR_CAP_CH3);
 	   }
-
-	   if(TIMER_GetFlagStatus(MDR_TIMER3, TIMER_STATUS_CCR_CAP1_CH1)) // прерывание по спаду
-	   {
-
-		  TIMER_ClearFlag(MDR_TIMER3, TIMER_STATUS_CCR_CAP1_CH1);
-	   }
-}
+	}
 
 //======================================================================================================================================
 
@@ -356,10 +298,10 @@ void ADC2_Configuration(void)
 	  ADC1_Init (&sADCx);
 
 	  /* Enable ADC1 EOCIF and AWOIFEN interrupts */
-	  ADC1_ITConfig((ADCx_IT_END_OF_CONVERSION  | ADCx_IT_OUT_OF_RANGE), ENABLE);
+	  ADC2_ITConfig((ADCx_IT_END_OF_CONVERSION  | ADCx_IT_OUT_OF_RANGE), ENABLE);
 
 	  /* ADC1 enable */
-	  ADC1_Cmd (ENABLE);
+	  ADC2_Cmd (ENABLE);
 
 }
 
@@ -375,7 +317,7 @@ void ADC_IRQHandler()
 		Vtemp = ADC1_GetResult();
 	}
 
-	else if (ADC2_GetFlagStatus(ADC2_FLAG_END_OF_CONVERSION) == SET)
+	else if (ADC2_GetFlagStatus(ADC2_FLAG_END_OF_CONVERSION) == SET)		// АЦП детектора
 	{
 		Vspec = ADC2_GetResult();
 	}

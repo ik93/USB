@@ -58,17 +58,17 @@
       <target file="delays.o" lastModified="156a0048abc">
          <source file="..\..\..\Delays\delays.c" lastModified="1407bcb1710"/>
       </target>
-      <target file="MDR32F9Qx_uart.o" lastModified="156a004852d">
-         <source file="..\..\..\Library\src\MDR32F9Qx_uart.c" lastModified="136d017f9f0"/>
+      <target file="MDR32F9Qx_adc.o" lastModified="156a004900c">
+         <source file="..\..\..\Library\src\MDR32F9Qx_adc.c" lastModified="141ee16c660"/>
       </target>
       <target file="MDR32F9Qx_port.o" lastModified="156a0048e7e">
          <source file="..\..\..\Library\src\MDR32F9Qx_port.c" lastModified="136d017f9f0"/>
       </target>
-      <target file="MDR32F9Qx_adc.o" lastModified="156a004900c">
-         <source file="..\..\..\Library\src\MDR32F9Qx_adc.c" lastModified="141ee16c660"/>
+      <target file="MDR32F9Qx_uart.o" lastModified="156a004852d">
+         <source file="..\..\..\Library\src\MDR32F9Qx_uart.c" lastModified="136d017f9f0"/>
       </target>
       <target file="main.o" lastModified="156dd3e0db2">
-         <source file="..\..\..\main.c" lastModified="156dd3e0747"/>
+         <source file="..\..\..\main.c" lastModified="156f6f3bd95"/>
       </target>
       <target file="MDR32F9Qx_usb.o" lastModified="156a004889b">
          <source file="..\..\..\Library\src\MDR32F9Qx_usb.c" lastModified="136d017f9f0"/>
