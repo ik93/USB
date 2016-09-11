@@ -2,7 +2,6 @@
 #include "main.h"
 #include "delays.h"
 #include "MDR32F9Qx_adc.h"
-#include "MDR32F9Qx_it.h"
 #include "MDR32F9Qx_timer.h"
 
 PORT_InitTypeDef PORT_InitStructure;
@@ -31,13 +30,21 @@ uint8_t RxUSB_Buffer[11];	  		  //Буфер приема сообщений от ПК
 ParseRxMessage task;                  //Текущая команда от ПК: начать набор, остановить, сброс
 ParseRxMessage previous_task;		  //Предыдущая команда от ПК
 
+	double temperature_C = 0;
+	uint32_t Vtemp;
+	uint32_t Vspec;
+	double  U, V;							//измеренное напряжение
+	uint8_t Flag_EOCIF;
+	uint32_t Flag_ADC;
+
 #define START_SPECTR 0x04	//Набор спектра
 #define STOP_SPECTR 0x01	//Останов
 #define RESET_SPECTR 0x02	//Сброс
 
-#define LED1            PORT_Pin_10
-#define LED2            PORT_Pin_11
-#define LED3            PORT_Pin_12
+#define V_Ref 3.3			//Опорное напряжение АЦП
+#define ADC_resolution 4096	//Разрешение АЦП
+#define Scale_Factor 0.10 	//Температурный коэффициент термодатчика [мВ/град.С]
+#define Offset 0.500			//Смещение термодатчика [мВ]
 
 ParseRxMessage RxParser(uint8_t *RxBuffer)
 {
@@ -176,7 +183,7 @@ void PortD_Init ()
 
 	/* Reset PORTD settings */
 		  PORT_DeInit(MDR_PORTD);
-
+		  PORT_StructInit(&PORT_InitStructure);
 		  /* Configure ADC pin: ADC2, ADC3 */
 		  /* Configure PORTD pin 2, 3 */
 		  PORT_InitStructure.PORT_Pin   = PORT_Pin_3 | PORT_Pin_2;
@@ -187,142 +194,131 @@ void PortD_Init ()
 
 
 //============================================================================================= Инициализация АЦП ===================================================================================
+		/* Общая для 2ух АЦП инициализация */
+void ADC_Configuration()
+{
+	ADC_InitTypeDef ADC_InitStructure;
+
+	//подать тактирование на АЦП
+			RST_CLK_PCLKcmd(RST_CLK_PCLK_ADC, ENABLE);
+			RST_CLK_ADCclkSelection(RST_CLK_ADCclkCPU_C1); 					// Берем частоту с CPU_C1 = 16 МГц
+			RST_CLK_ADCclkPrescaler(RST_CLK_ADCclkDIV32); 					// Предделитель в блоке ADC_C3 ( 16 МГц / 32 = 500 КГц )
+			RST_CLK_ADCclkEnable(ENABLE);
+
+
+		/* Init NVIC */
+		 /* SCB->AIRCR = 0x05FA0000 | ((uint32_t)0x500);
+		  SCB->VTOR = 0x08000000;
+		  	  */
+
+		  /* ADC Configuration */
+		  /* Reset all ADC settings */
+		  ADC_DeInit();
+		  ADC_StructInit(&ADC_InitStructure);
+		  ADC_InitStructure.ADC_SynchronousMode      = ADC_SyncMode_Independent;
+		  ADC_InitStructure.ADC_StartDelay           = 0;
+		  ADC_InitStructure.ADC_TempSensor           = ADC_TEMP_SENSOR_Disable;
+		  ADC_InitStructure.ADC_TempSensorAmplifier  = ADC_TEMP_SENSOR_AMPLIFIER_Disable;
+		  ADC_InitStructure.ADC_TempSensorConversion = ADC_TEMP_SENSOR_CONVERSION_Disable;
+		  ADC_InitStructure.ADC_IntVRefConversion    = ADC_VREF_CONVERSION_Disable;			// Запретить преобразования для канала VREF (внутренней опоры)
+		  ADC_InitStructure.ADC_IntVRefTrimming      = 1;									// !!! Изменила с 0 на 1.  Подстройка источника напряжения VREF
+		  ADC_Init (&ADC_InitStructure);
+}
+
 // Иниц АЦП для Термодатчика
 void ADC1_Configuration(void)
 {
-	ADC_InitTypeDef sADC;
-	ADCx_InitTypeDef sADCx;
-
-		//подать тактирование на АЦП
-		RST_CLK_PCLKcmd(RST_CLK_PCLK_ADC, ENABLE);
-		RST_CLK_ADCclkSelection(RST_CLK_ADCclkCPU_C1); 					// Берем частоту с CPU_C1 = 16 МГц
-		RST_CLK_ADCclkPrescaler(RST_CLK_ADCclkDIV32); 					// Предделитель в блоке ADC_C3 ( 16 МГц / 32 = 500 КГц )
-		RST_CLK_ADCclkEnable(ENABLE);
+		ADCx_InitTypeDef ADC1_InitStructure;
 
 
-	/* Init NVIC */
-	  SCB->AIRCR = 0x05FA0000 | ((uint32_t)0x500);
-	  SCB->VTOR = 0x08000000;
-	  /* Disable all interrupt */
-	  NVIC->ICPR[0] = 0xFFFFFFFF;
-	  NVIC->ICER[0] = 0xFFFFFFFF;
-
-	  /* Enable ADC interrupt  */
-	  NVIC->ISER[0] = (1<<ADC_IRQn);
-
-	  /* ADC Configuration */
-	  /* Reset all ADC settings */
-	  ADC_DeInit();
-	  ADC_StructInit(&sADC);
-	  sADC.ADC_SynchronousMode      = ADC_SyncMode_Independent;
-	  sADC.ADC_StartDelay           = 0;
-	  sADC.ADC_TempSensor           = ADC_TEMP_SENSOR_Disable;
-	  sADC.ADC_TempSensorAmplifier  = ADC_TEMP_SENSOR_AMPLIFIER_Disable;
-	  sADC.ADC_TempSensorConversion = ADC_TEMP_SENSOR_CONVERSION_Disable;
-	  sADC.ADC_IntVRefConversion    = ADC_VREF_CONVERSION_Disable;			// Запретить преобразования для канала VREF (внутренней опоры)
-	  sADC.ADC_IntVRefTrimming      = 0;
-	  ADC_Init (&sADC);
-
-	  ADCx_StructInit (&sADCx);
-	  sADCx.ADC_ClockSource      = ADC_CLOCK_SOURCE_CPU;
-	  sADCx.ADC_SamplingMode     = ADC_SAMPLING_MODE_CICLIC_CONV;			// Режим циклического преобразования (несколько раз подряд)
-	  sADCx.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;
-	  sADCx.ADC_ChannelNumber    = ADC_CH_ADC3;
-	  sADCx.ADC_Channels         = 0;
-	  sADCx.ADC_LevelControl     = ADC_LEVEL_CONTROL_Disable;				// Контроль уровня входнрого напряжения (отключено)
-	  sADCx.ADC_LowLevel         = 0;
-	  sADCx.ADC_HighLevel        = 0;
-	  sADCx.ADC_VRefSource       = ADC_VREF_SOURCE_INTERNAL;				// Вид источника опроного напряжения (внутренний)
-	  sADCx.ADC_IntVRefSource    = ADC_INT_VREF_SOURCE_INEXACT;				// Вид внутреннего источника опроного напряжения (не точный)
-	  sADCx.ADC_Prescaler        = ADC_CLK_div_32768;						// Предделитель частоты тактирования АЦП
-	  sADCx.ADC_DelayGo          = 0xF;										// Задержка между запусками АЦП (максимальная)
-	  ADC1_Init (&sADCx);
+	  ADCx_StructInit (&ADC1_InitStructure);
+	  ADC1_InitStructure.ADC_ClockSource      = ADC_CLOCK_SOURCE_ADC;						// !! Тоже изменила
+	  ADC1_InitStructure.ADC_SamplingMode     = ADC_SAMPLING_MODE_SINGLE_CONV;				// Режим циклического преобразования (несколько раз подряд)
+	  ADC1_InitStructure.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;
+	  ADC1_InitStructure.ADC_ChannelNumber    = ADC_CH_ADC3;
+	  ADC1_InitStructure.ADC_Channels         = 0;
+	  ADC1_InitStructure.ADC_LevelControl     = ADC_LEVEL_CONTROL_Disable;					// Контроль уровня входнрого напряжения (отключено)
+	  ADC1_InitStructure.ADC_LowLevel         = 0;
+	  ADC1_InitStructure.ADC_HighLevel        = 0;
+	  ADC1_InitStructure.ADC_VRefSource       = ADC_VREF_SOURCE_INTERNAL;					// Вид источника опроного напряжения (внутренний)
+	  ADC1_InitStructure.ADC_IntVRefSource    = ADC_INT_VREF_SOURCE_INEXACT;				// Вид внутреннего источника опроного напряжения (не точный)
+	  ADC1_InitStructure.ADC_Prescaler        = ADC_CLK_div_None;							// Предделитель частоты тактирования АЦП
+	  ADC1_InitStructure.ADC_DelayGo          = 0xf;										// Задержка между запусками АЦП (максимальная)
+	  ADC1_Init (&ADC1_InitStructure);
 
 	  /* Enable ADC1 EOCIF and AWOIFEN interrupts */
-	  ADC1_ITConfig((ADCx_IT_END_OF_CONVERSION  | ADCx_IT_OUT_OF_RANGE), ENABLE);
+	  ADC1_ITConfig(ADC1_IT_END_OF_CONVERSION, ENABLE);
 
 	  /* ADC1 enable */
 	  ADC1_Cmd (ENABLE);
+	  /* Enable ADC interrupt  */
+	  NVIC_EnableIRQ(ADC_IRQn);
 
 }
 
 // Иниц АЦП для приема импульсов
 void ADC2_Configuration(void)
 {
-	ADC_InitTypeDef sADC;
-	ADCx_InitTypeDef sADCx;
+		ADCx_InitTypeDef ADC2_InitStructure;
 
-		//подать тактирование на АЦП
-		RST_CLK_PCLKcmd(RST_CLK_PCLK_ADC, ENABLE);
-		RST_CLK_ADCclkSelection(RST_CLK_ADCclkCPU_C1); 					// Берем частоту с CPU_C1 = 16 МГц
-		RST_CLK_ADCclkPrescaler(RST_CLK_ADCclkDIV32); 					// Предделитель в блоке ADC_C3 ( 16 МГц / 32 = 500 КГц )
-		RST_CLK_ADCclkEnable(ENABLE);
-
-
-	/* Init NVIC */
-	  SCB->AIRCR = 0x05FA0000 | ((uint32_t)0x500);
-	  SCB->VTOR = 0x08000000;
-	  /* Disable all interrupt */
-	  NVIC->ICPR[0] = 0xFFFFFFFF;
-	  NVIC->ICER[0] = 0xFFFFFFFF;
-
-	  /* Enable ADC interrupt  */
-	  NVIC->ISER[0] = (1<<ADC_IRQn);
-
-	  /* ADC Configuration */
-	  /* Reset all ADC settings */
-	  ADC_DeInit();
-	  ADC_StructInit(&sADC);
-	  sADC.ADC_SynchronousMode      = ADC_SyncMode_Independent;
-	  sADC.ADC_StartDelay           = 0;
-	  sADC.ADC_TempSensor           = ADC_TEMP_SENSOR_Disable;
-	  sADC.ADC_TempSensorAmplifier  = ADC_TEMP_SENSOR_AMPLIFIER_Disable;
-	  sADC.ADC_TempSensorConversion = ADC_TEMP_SENSOR_CONVERSION_Disable;
-	  sADC.ADC_IntVRefConversion    = ADC_VREF_CONVERSION_Disable;			// Запретить преобразования для канала VREF (внутренней опоры)
-	  sADC.ADC_IntVRefTrimming      = 0;
-	  ADC_Init (&sADC);
-
-	  ADCx_StructInit (&sADCx);
-	  sADCx.ADC_ClockSource      = ADC_CLOCK_SOURCE_CPU;
-	  sADCx.ADC_SamplingMode     = ADC_SAMPLING_MODE_CICLIC_CONV;			// Режим циклического преобразования (несколько раз подряд)
-	  sADCx.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;
-	  sADCx.ADC_ChannelNumber    = ADC_CH_ADC2;
-	  sADCx.ADC_Channels         = 0;
-	  sADCx.ADC_LevelControl     = ADC_LEVEL_CONTROL_Disable;				// Контроль уровня входнрого напряжения (отключено)
-	  sADCx.ADC_LowLevel         = 0;
-	  sADCx.ADC_HighLevel        = 0;
-	  sADCx.ADC_VRefSource       = ADC_VREF_SOURCE_INTERNAL;				// Вид источника опроного напряжения (внутренний)
-	  sADCx.ADC_IntVRefSource    = ADC_INT_VREF_SOURCE_INEXACT;				// Вид внутреннего источника опроного напряжения (не точный)
-	  sADCx.ADC_Prescaler        = ADC_CLK_div_32768;						// Предделитель частоты тактирования АЦП
-	  sADCx.ADC_DelayGo          = 0xF;										// Задержка между запусками АЦП (максимальная)
-	  ADC1_Init (&sADCx);
+	  ADCx_StructInit (&ADC2_InitStructure);
+	  ADC2_InitStructure.ADC_ClockSource      = ADC_CLOCK_SOURCE_ADC;
+	  ADC2_InitStructure.ADC_SamplingMode     = ADC_SAMPLING_MODE_CICLIC_CONV;			// Режим циклического преобразования (несколько раз подряд)
+	  ADC2_InitStructure.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;
+	  ADC2_InitStructure.ADC_ChannelNumber    = ADC_CH_ADC2;
+	  ADC2_InitStructure.ADC_Channels         = 0;
+	  ADC2_InitStructure.ADC_LevelControl     = ADC_LEVEL_CONTROL_Disable;				// Контроль уровня входнрого напряжения (отключено)
+	  ADC2_InitStructure.ADC_LowLevel         = 0;
+	  ADC2_InitStructure.ADC_HighLevel        = 0;
+	  ADC2_InitStructure.ADC_VRefSource       = ADC_VREF_SOURCE_INTERNAL;				// Вид источника опроного напряжения (внутренний)
+	  ADC2_InitStructure.ADC_IntVRefSource    = ADC_INT_VREF_SOURCE_INEXACT;			// Вид внутреннего источника опроного напряжения (не точный)
+	  ADC2_InitStructure.ADC_Prescaler        = ADC_CLK_div_None;						// Предделитель частоты тактирования АЦП
+	  ADC2_InitStructure.ADC_DelayGo          = 0xf;									// Задержка между запусками АЦП (максимальная)
+	  ADC1_Init (&ADC2_InitStructure);
 
 	  /* Enable ADC1 EOCIF and AWOIFEN interrupts */
-	  ADC2_ITConfig((ADCx_IT_END_OF_CONVERSION  | ADCx_IT_OUT_OF_RANGE), ENABLE);
+	  ADC2_ITConfig(ADC2_IT_END_OF_CONVERSION, ENABLE);
 
 	  /* ADC1 enable */
 	  ADC2_Cmd (ENABLE);
+	  /* Enable ADC interrupt  */
+	  NVIC_EnableIRQ(ADC_IRQn);
 
 }
 
+double Get_Temperature_C(uint32_t Vtemp)
+{
+	double Temp_C;
+
+	Temp_C = ((Vtemp * V_Ref) / (ADC_resolution) - Offset) / Scale_Factor;
+
+	return Temp_C;
+}
 
 void ADC_IRQHandler()
 {
-	int temperature_C = 0;
-	uint32_t Vtemp;
-	uint32_t Vspec;
+	Flag_ADC = ADC1_GetStatus();
+	Flag_EOCIF = ADC1_GetFlagStatus(ADC1_FLAG_END_OF_CONVERSION);
 
 	if (ADC1_GetFlagStatus(ADC1_FLAG_END_OF_CONVERSION) == SET)				// АЦП термодатчика. флаг сам обнулится после чтения из буф
 	{
 		Vtemp = ADC1_GetResult();
+		V = (V_Ref / ADC_resolution) * Vtemp ;
+		U = (V_Ref / ADC_resolution) * (Vtemp & 0x00000FFF);
+
+		Flag_ADC = ADC1_GetStatus();
+		Flag_EOCIF = ADC1_GetFlagStatus(ADC1_FLAG_END_OF_CONVERSION);
+
 	}
 
-	else if (ADC2_GetFlagStatus(ADC2_FLAG_END_OF_CONVERSION) == SET)		// АЦП детектора
+	if (ADC2_GetFlagStatus(ADC2_FLAG_END_OF_CONVERSION) == SET)		// АЦП детектора
 	{
 		Vspec = ADC2_GetResult();
 	}
 
+	temperature_C = Get_Temperature_C(Vtemp);			//убрать! вставлено для отладки
 }
+
 
 //===============================================================================================================================================================================
 
@@ -380,6 +376,7 @@ int main(void)
 
 	PLL_init();
 	PortD_Init();
+	ADC_Configuration();
 	ADC1_Configuration();
 	Setup_USB();
 	USB_CDC_Init(RxUSB_Buffer, 1, SET);

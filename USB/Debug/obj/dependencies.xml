@@ -125,6 +125,13 @@
          <include file="..\..\..\Library\inc\MDR32F9Qx_rst_clk.h"/>
          <include file="..\..\..\cmsis\MDR32F9Qx_config.h"/>
       </source>
+      <source file="..\..\..\main.c" lastModified="1571b40232a">
+         <include file="..\..\..\cmsis\MDR32F9x.h"/>
+         <include file="..\..\..\main.h"/>
+         <include file="..\..\..\Delays\delays.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_adc.h"/>
+         <include file="..\..\..\Library\inc\MDR32F9Qx_timer.h"/>
+      </source>
       <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="13658c24360">
       </source>
       <source file="..\..\..\Library\src\MDR32F9Qx_adc.c" lastModified="141ee16c660">

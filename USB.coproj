@@ -88,8 +88,8 @@
     <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
     <File name="cmsisboot" path="" type="2"/>
     <File name="cmsis/MDR32F9Qx_config.h" path="cmsis/MDR32F9Qx_config.h" type="1"/>
-    <File name="Library/inc/MDR32F9Qx_rst_clk.h" path="Library/inc/MDR32F9Qx_rst_clk.h" type="1"/>
     <File name="Library/inc/MDR32F9Qx_dac.h" path="Library/inc/MDR32F9Qx_dac.h" type="1"/>
+    <File name="Library/inc/MDR32F9Qx_rst_clk.h" path="Library/inc/MDR32F9Qx_rst_clk.h" type="1"/>
     <File name="USBLibrary/inc/MDR32F9Qx_usb_CDC.h" path="USBLibrary/inc/MDR32F9Qx_usb_CDC.h" type="1"/>
     <File name="Library/inc/MDR32F9Qx_port.h" path="Library/inc/MDR32F9Qx_port.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_port.c" path="Library/src/MDR32F9Qx_port.c" type="1"/>
@@ -97,22 +97,22 @@
     <File name="Library/src/MDR32F9Qx_ebc.c" path="Library/src/MDR32F9Qx_ebc.c" type="1"/>
     <File name="USBLibrary/inc" path="" type="2"/>
     <File name="Library/src/MDR32F9Qx_comp.c" path="Library/src/MDR32F9Qx_comp.c" type="1"/>
-    <File name="Library/src/MDR32F9Qx_dac.c" path="Library/src/MDR32F9Qx_dac.c" type="1"/>
     <File name="cmsisboot/startup" path="" type="2"/>
+    <File name="Library/src/MDR32F9Qx_dac.c" path="Library/src/MDR32F9Qx_dac.c" type="1"/>
     <File name="Delays/delays.c" path="Delays/delays.c" type="1"/>
     <File name="Library/inc/MDR32F9Qx_i2c.h" path="Library/inc/MDR32F9Qx_i2c.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_power.c" path="Library/src/MDR32F9Qx_power.c" type="1"/>
     <File name="Library/src/MDR32F9Qx_eeprom.c" path="Library/src/MDR32F9Qx_eeprom.c" type="1"/>
-    <File name="Library/inc/MDR32F9Qx_bkp.h" path="Library/inc/MDR32F9Qx_bkp.h" type="1"/>
     <File name="cmsisboot/startup/startup_MDR32F9x.c" path="cmsisboot/startup/startup_MDR32F9x.c" type="1"/>
+    <File name="Library/inc/MDR32F9Qx_bkp.h" path="Library/inc/MDR32F9Qx_bkp.h" type="1"/>
     <File name="cmsis/system_MDR32F9Qx.c" path="cmsis/system_MDR32F9Qx.c" type="1"/>
     <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="Library/inc/MDR32F9Qx_usb.h" path="Library/inc/MDR32F9Qx_usb.h" type="1"/>
     <File name="Library/inc/MDR32F9Qx_adc.h" path="Library/inc/MDR32F9Qx_adc.h" type="1"/>
-    <File name="cmsis/core_cm3.h" path="cmsis/core_cm3.h" type="1"/>
     <File name="Library/inc/MDR32F9Qx_ebc.h" path="Library/inc/MDR32F9Qx_ebc.h" type="1"/>
-    <File name="Library/inc/MDR32F9Qx_uart.h" path="Library/inc/MDR32F9Qx_uart.h" type="1"/>
+    <File name="cmsis/core_cm3.h" path="cmsis/core_cm3.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_rst_clk.c" path="Library/src/MDR32F9Qx_rst_clk.c" type="1"/>
+    <File name="Library/inc/MDR32F9Qx_uart.h" path="Library/inc/MDR32F9Qx_uart.h" type="1"/>
     <File name="Delays/delays.h" path="Delays/delays.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_i2c.c" path="Library/src/MDR32F9Qx_i2c.c" type="1"/>
     <File name="Library/src/MDR32F9Qx_wwdg.c" path="Library/src/MDR32F9Qx_wwdg.c" type="1"/>
@@ -121,9 +121,9 @@
     <File name="Library/src/MDR32F9Qx_dma.c" path="Library/src/MDR32F9Qx_dma.c" type="1"/>
     <File name="cmsis" path="" type="2"/>
     <File name="Library/src/MDR32F9Qx_iwdg.c" path="Library/src/MDR32F9Qx_iwdg.c" type="1"/>
-    <File name="Library/src/MDR32F9Qx_uart.c" path="Library/src/MDR32F9Qx_uart.c" type="1"/>
     <File name="Library/inc/MDR32F9Qx_comp.h" path="Library/inc/MDR32F9Qx_comp.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_adc.c" path="Library/src/MDR32F9Qx_adc.c" type="1"/>
+    <File name="Library/src/MDR32F9Qx_uart.c" path="Library/src/MDR32F9Qx_uart.c" type="1"/>
     <File name="Library/inc/MDR32F9Qx_dma.h" path="Library/inc/MDR32F9Qx_dma.h" type="1"/>
     <File name="Library/src/MDR32F9Qx_can.c" path="Library/src/MDR32F9Qx_can.c" type="1"/>
     <File name="Library/inc/MDR32F9Qx_ssp.h" path="Library/inc/MDR32F9Qx_ssp.h" type="1"/>
