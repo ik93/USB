@@ -43,7 +43,7 @@ ParseRxMessage previous_task;		  //Предыдущая команда от ПК
 
 #define V_Ref 3.3			//Опорное напряжение АЦП
 #define ADC_resolution 4096	//Разрешение АЦП
-#define Scale_Factor 0.10 	//Температурный коэффициент термодатчика [мВ/град.С]
+#define Scale_Factor 0.010 	//Температурный коэффициент термодатчика [мВ/град.С]
 #define Offset 0.500			//Смещение термодатчика [мВ]
 
 ParseRxMessage RxParser(uint8_t *RxBuffer)
@@ -252,7 +252,7 @@ void ADC1_Configuration(void)
 	  /* ADC1 enable */
 	  ADC1_Cmd (ENABLE);
 	  /* Enable ADC interrupt  */
-	  NVIC_EnableIRQ(ADC_IRQn);
+	//  NVIC_EnableIRQ(ADC_IRQn);
 
 }
 
@@ -263,7 +263,7 @@ void ADC2_Configuration(void)
 
 	  ADCx_StructInit (&ADC2_InitStructure);
 	  ADC2_InitStructure.ADC_ClockSource      = ADC_CLOCK_SOURCE_ADC;
-	  ADC2_InitStructure.ADC_SamplingMode     = ADC_SAMPLING_MODE_CICLIC_CONV;			// Режим циклического преобразования (несколько раз подряд)
+	  ADC2_InitStructure.ADC_SamplingMode     = ADC_SAMPLING_MODE_SINGLE_CONV;			// Режим циклического преобразования (несколько раз подряд)
 	  ADC2_InitStructure.ADC_ChannelSwitching = ADC_CH_SWITCHING_Disable;
 	  ADC2_InitStructure.ADC_ChannelNumber    = ADC_CH_ADC2;
 	  ADC2_InitStructure.ADC_Channels         = 0;
@@ -279,7 +279,7 @@ void ADC2_Configuration(void)
 	  /* Enable ADC1 EOCIF and AWOIFEN interrupts */
 	  ADC2_ITConfig(ADC2_IT_END_OF_CONVERSION, ENABLE);
 
-	  /* ADC1 enable */
+	  /* ADC2 enable */
 	  ADC2_Cmd (ENABLE);
 	  /* Enable ADC interrupt  */
 	  NVIC_EnableIRQ(ADC_IRQn);
@@ -289,8 +289,8 @@ void ADC2_Configuration(void)
 double Get_Temperature_C(uint32_t Vtemp)
 {
 	double Temp_C;
-
-	Temp_C = ((Vtemp * V_Ref) / (ADC_resolution) - Offset) / Scale_Factor;
+	U = (V_Ref / ADC_resolution) * (Vtemp & 0x00000FFF);
+	Temp_C = (U - Offset) / Scale_Factor;
 
 	return Temp_C;
 }
@@ -303,12 +303,9 @@ void ADC_IRQHandler()
 	if (ADC1_GetFlagStatus(ADC1_FLAG_END_OF_CONVERSION) == SET)				// АЦП термодатчика. флаг сам обнулится после чтения из буф
 	{
 		Vtemp = ADC1_GetResult();
-		V = (V_Ref / ADC_resolution) * Vtemp ;
-		U = (V_Ref / ADC_resolution) * (Vtemp & 0x00000FFF);
 
 		Flag_ADC = ADC1_GetStatus();
 		Flag_EOCIF = ADC1_GetFlagStatus(ADC1_FLAG_END_OF_CONVERSION);
-
 	}
 
 	if (ADC2_GetFlagStatus(ADC2_FLAG_END_OF_CONVERSION) == SET)		// АЦП детектора
@@ -378,6 +375,7 @@ int main(void)
 	PortD_Init();
 	ADC_Configuration();
 	ADC1_Configuration();
+	ADC2_Configuration();
 	Setup_USB();
 	USB_CDC_Init(RxUSB_Buffer, 1, SET);
 	USB_CDC_Reset();
